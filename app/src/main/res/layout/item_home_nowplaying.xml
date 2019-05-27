@@ -28,7 +28,7 @@
             android:maxLines="1"
             android:padding="8dp"
             android:textColor="@color/colorWhite"
-            tools:text="Venom" />
+            tools:text="Venom"/>
 
     </RelativeLayout>
 
