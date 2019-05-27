@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="8dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfilePath"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                tools:src="@drawable/venom_poster"
+                android:scaleType="centerCrop"/>
+
+        <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                tools:text="Raka Permana"
+                android:layout_marginLeft="16dp"
+                android:textSize="14sp"
+                android:gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="Marko"
+            android:textSize="14sp"
+            android:gravity="right|center"
+            android:textStyle="italic"
+            android:id="@+id/tvCharacter"/>
+
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_marginTop="16dp"
+          android:background="@color/colorPrimary"/>
+
+
+</LinearLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_margin="8dp"
+    android:background="@color/colorWhite"
+    android:elevation="0dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp">
+
+    <RelativeLayout
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imgPoster"
+            android:layout_width="90dp"
+            android:layout_height="130dp"
+            android:background="@drawable/rounded"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/venom_poster" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@id/imgPoster">
+
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textSize="11sp"
+                android:textColor="@color/colorBlack"
+                tools:text="2019" />
+
+            <TextView
+                android:id="@+id/tvActors"
+                android:textSize="11sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorBlack"
+                android:layout_marginRight="16dp"
+                tools:text="as Alita" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:layout_below="@id/tvReleaseDate"
+                android:layout_marginLeft="16dp"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="Venom" />
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Horror, Science Fiction, Thriller"-->
+            <!--android:textSize="11sp"-->
+            <!--android:id="@+id/tvGenres"-->
+            <!--android:layout_below="@id/tvTitle"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginLeft="16dp"/>-->
+
+            <ImageView
+                android:id="@+id/imgTmdbLogo"
+                android:layout_width="20dp"
+                android:layout_height="22dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/tmdb_logo" />
+
+            <TextView
+                android:id="@+id/tvRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="4dp"
+                android:layout_toRightOf="@id/imgTmdbLogo"
+                android:textSize="11sp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                tools:text="7.7" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
+
+
