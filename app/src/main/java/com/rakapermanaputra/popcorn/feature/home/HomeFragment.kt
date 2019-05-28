@@ -14,7 +14,6 @@ import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.*
 import com.rakapermanaputra.popcorn.feature.home.morepopular_discover.MoreDiscoverActivity
 import com.rakapermanaputra.popcorn.feature.home.morepopular_tv.MorePopularTvActivity
-import com.rakapermanaputra.popcorn.model.Category
 import com.rakapermanaputra.popcorn.model.Movies
 import com.rakapermanaputra.popcorn.model.TvShows
 import com.rakapermanaputra.popcorn.model.repository.MoviesRepoImpl
@@ -36,14 +35,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : Fragment(), HomeFragmentContract.View {
 
-
     private var nowPlayingMovies: MutableList<Movies> = mutableListOf()
     private val popularMovie: MutableList<Movies> = mutableListOf()
     private val popularTv: MutableList<TvShows> = mutableListOf()
     private val discoverMovie: MutableList<Movies> = mutableListOf()
 
     private lateinit var presenter: HomeFragmentPresenter
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -57,18 +54,6 @@ class HomeFragment : Fragment(), HomeFragmentContract.View {
         presenter.getPopularMovies()
         presenter.getPopularTvs()
         presenter.getDiscoverMovies()
-
-        // rv-category
-        val listOfGenres = listOf(Category("Horror"),
-            Category("Thriller"),
-            Category("Comedy"),
-            Category("Romace")
-        )
-        val categoryAdapter = HomeCategoryAdapter(requireContext(),listOfGenres)
-        rvCategory.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayout.HORIZONTAL, false)
-            adapter = categoryAdapter
-        }
 
         //onclick-more
         ic_more_popular_movie.setOnClickListener {

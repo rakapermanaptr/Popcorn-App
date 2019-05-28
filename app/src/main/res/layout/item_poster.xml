@@ -30,6 +30,9 @@
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="8dp"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             tools:text="Venom" />

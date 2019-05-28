@@ -13,28 +13,30 @@
         android:orientation="vertical"
         android:paddingLeft="16dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/now_playing"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvNowPlaying"
             android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
             android:layout_height="180dp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvCategory"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:paddingRight="8dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingRight="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:text="Popular Movie" />
+                android:text="Popular Movie"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/ic_more_popular_movie"
@@ -52,16 +54,16 @@
             android:layout_marginTop="8dp" />
 
         <RelativeLayout
-            android:paddingRight="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp">
+            android:layout_marginTop="16dp"
+            android:paddingRight="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Popular Tv" />
+                android:text="Popular Tv"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/ic_more_popular_tv"
@@ -79,16 +81,16 @@
             android:layout_marginTop="8dp" />
 
         <RelativeLayout
-            android:paddingRight="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp">
+            android:layout_marginTop="16dp"
+            android:paddingRight="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Discover Movie" />
+                android:text="Discover Movie"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/ic_more_discover_movie"
@@ -104,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="32dp" />
 
 
     </LinearLayout>
