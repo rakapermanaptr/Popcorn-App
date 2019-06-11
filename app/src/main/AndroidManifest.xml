@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.home.morepopular_discover.MoreDiscoverActivity"></activity>
+        <activity android:name=".feature.login.LoginActivity"></activity>
+        <activity android:name=".feature.home.morepopular_discover.MoreDiscoverActivity" />
         <activity android:name=".feature.home.morepopular_tv.MorePopularTvActivity" />
         <activity android:name=".feature.home.morepopular_movie.MorePopularActivity" />
         <activity

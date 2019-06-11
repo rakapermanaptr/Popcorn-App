@@ -3,13 +3,12 @@ package com.rakapermanaputra.popcorn.network
 import com.rakapermanaputra.popcorn.BuildConfig
 import com.rakapermanaputra.popcorn.model.*
 import io.reactivex.Flowable
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiRest {
 
     @GET("movie/now_playing" + BuildConfig.API_KEY)
-    fun getNowPlayingMovies() : Flowable<MoviesResponse>
+    fun getNowPlayingMovies(@Query("page")page: Int) : Flowable<MoviesResponse>
 
     @GET("movie/popular" +  BuildConfig.API_KEY)
     fun getPopularMovies() : Flowable<MoviesResponse>
@@ -73,6 +72,15 @@ interface ApiRest {
 
     @GET("person/{person_id}/images" +  BuildConfig.API_KEY)
     fun getImagesPeople(@Path("person_id") id: Int) : Flowable<ImagesPeopleResponse>
+
+    @GET("authentication/token/new" +  BuildConfig.API_KEY)
+    fun getReqToken() : Flowable<Token>
+
+    @POST("authentication/token/validate_with_login" + BuildConfig.API_KEY)
+    fun getToken(@Body login: Login) : Flowable<Token>
+
+    @POST("authentication/session/new" + BuildConfig.API_KEY)
+    fun getSession(@Body requestToken: RequestToken) : Flowable<Session>
 
 //    @GET("movie/now_playing" + BuildConfig.API_KEY)
 //    fun getDetailMovie() : Flowable<MoviesResponse>

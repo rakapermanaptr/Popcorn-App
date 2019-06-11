@@ -14,6 +14,6 @@ class MoviesRepoImpl(private val apiRest: ApiRest) : MoviesRepo {
 
     override fun getPopular(): Flowable<MoviesResponse> = apiRest.getPopularMovies()
 
-    override fun getNowPlaying(): Flowable<MoviesResponse> = apiRest.getNowPlayingMovies()
+    override fun getNowPlaying(page: Int): Flowable<MoviesResponse> = apiRest.getNowPlayingMovies(page)
 
 }

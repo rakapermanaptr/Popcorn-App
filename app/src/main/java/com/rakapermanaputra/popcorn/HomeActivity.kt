@@ -13,13 +13,15 @@ import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import com.rakapermanaputra.popcorn.feature.discover.DiscoverFragment
-import com.rakapermanaputra.popcorn.feature.home.HomeFragment
+import com.rakapermanaputra.popcorn.feature.login.LoginActivity
+//import com.rakapermanaputra.popcorn.feature.home.HomeFragment
 import com.rakapermanaputra.popcorn.feature.movies.MoviesFragment
 import com.rakapermanaputra.popcorn.feature.popular_people.PopularPeopleFragment
 import com.rakapermanaputra.popcorn.feature.tvshows.TvShowsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -38,7 +40,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
-            var fragment: Fragment = HomeFragment()
+            var fragment: Fragment = MoviesFragment()
             supportFragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
         }
     }
@@ -91,7 +93,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_home -> {
                 toast("Home")
-                fragment = HomeFragment()
+//                fragment = HomeFragment()
             }
             R.id.nav_movies -> {
                 // Handle the camera action
@@ -118,7 +120,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_settings -> {
                 toast("Settings")
-
+                startActivity<LoginActivity>()
             }
         }
 

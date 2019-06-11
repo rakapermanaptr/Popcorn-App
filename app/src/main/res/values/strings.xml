@@ -19,4 +19,7 @@
     <string name="search">search</string>
     <string name="home">Home</string>
     <string name="now_playing">Now Playing</string>
+    <string name="login">Login</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
 </resources>

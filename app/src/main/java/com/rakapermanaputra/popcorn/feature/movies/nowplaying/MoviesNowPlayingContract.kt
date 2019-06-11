@@ -11,7 +11,7 @@ interface MoviesNowPlayingContract {
     }
 
     interface Presenter {
-        fun getNowPlaying()
+        fun getNowPlaying(page: Int)
         fun onDestroy()
     }
 }
