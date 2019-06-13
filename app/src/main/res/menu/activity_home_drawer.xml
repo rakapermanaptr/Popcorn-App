@@ -37,7 +37,7 @@
     </group>
 
     <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_login"
             android:icon="@drawable/settings"
             android:title="@string/login"/>
 

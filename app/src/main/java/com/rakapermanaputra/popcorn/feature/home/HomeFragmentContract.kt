@@ -1,7 +1,6 @@
 package com.rakapermanaputra.popcorn.feature.home
 
-import com.rakapermanaputra.popcorn.model.Movies
-import com.rakapermanaputra.popcorn.model.TvShows
+import com.rakapermanaputra.popcorn.model.*
 
 interface HomeFragmentContract {
 

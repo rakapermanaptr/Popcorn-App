@@ -7,8 +7,11 @@ import retrofit2.http.*
 
 interface ApiRest {
 
+//    @GET("movie/now_playing" + BuildConfig.API_KEY)
+//    fun getNowPlayingMovies(@Query("page")page: Int) : Flowable<MoviesResponse>
+
     @GET("movie/now_playing" + BuildConfig.API_KEY)
-    fun getNowPlayingMovies(@Query("page")page: Int) : Flowable<MoviesResponse>
+    fun getNowPlayingMovies() : Flowable<MoviesResponse>
 
     @GET("movie/popular" +  BuildConfig.API_KEY)
     fun getPopularMovies() : Flowable<MoviesResponse>
@@ -81,6 +84,9 @@ interface ApiRest {
 
     @POST("authentication/session/new" + BuildConfig.API_KEY)
     fun getSession(@Body requestToken: RequestToken) : Flowable<Session>
+
+    @GET("account" + BuildConfig.API_KEY)
+    fun getAccount(@Query("session_id") sessionId: String): Flowable<Account>
 
 //    @GET("movie/now_playing" + BuildConfig.API_KEY)
 //    fun getDetailMovie() : Flowable<MoviesResponse>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import com.rakapermanaputra.popcorn.HomeActivity
 import com.rakapermanaputra.popcorn.R
+import com.rakapermanaputra.popcorn.db.SharedPreference
 import com.rakapermanaputra.popcorn.model.Login
 import com.rakapermanaputra.popcorn.model.RequestToken
 import com.rakapermanaputra.popcorn.model.Session
@@ -23,6 +24,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var rToken: Token
     private lateinit var login: Login
     private lateinit var requestToken: RequestToken
+    private lateinit var sessionId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         presenter = LoginPresenter(this, request)
         presenter.getReqToken()
 
+        //SharedPreference
+        val sharedPreference: SharedPreference = SharedPreference(this)
 
         btnLogin.setOnClickListener {
             val username = edtUsername.text.toString()
@@ -45,8 +49,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
             presenter.getToken(login)
 
-            presenter.getSession(requestToken)
+//            presenter.getSession(requestToken)
 
+            sharedPreference.save("TOKEN", token)
+//            toast("session id : " + sessionId)
         }
     }
 
@@ -70,7 +76,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showSessionId(session: Session) {
-        Log.d("Data", "Session id : " + session.sessionId)
+        sessionId = session.sessionId
+        Log.d("Data", "Session id : " + sessionId)
     }
 
 }

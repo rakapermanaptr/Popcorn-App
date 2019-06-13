@@ -5,7 +5,9 @@ import io.reactivex.Flowable
 
 interface MoviesRepo {
 
-    fun getNowPlaying(page: Int): Flowable<MoviesResponse>
+//    fun getNowPlaying(page: Int): Flowable<MoviesResponse>
+
+    fun getNowPlaying(): Flowable<MoviesResponse>
 
     fun getPopular(): Flowable<MoviesResponse>
 
