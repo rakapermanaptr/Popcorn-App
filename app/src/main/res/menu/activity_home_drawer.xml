@@ -41,4 +41,9 @@
             android:icon="@drawable/settings"
             android:title="@string/login"/>
 
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/settings"
+        android:title="@string/logout"/>
+
 </menu>

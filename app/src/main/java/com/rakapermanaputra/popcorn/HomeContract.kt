@@ -8,11 +8,9 @@ interface HomeContract {
 //        fun showLoading()
 //        fun hideLoading()
         fun showAccountUser(userAccount: Account)
-        fun showSessionId(session: Session?)
     }
 
     interface Presenter {
         fun getAccountUser(sessionId: String)
-        fun getSession(requestToken: RequestToken)
     }
 }

@@ -27,6 +27,7 @@ class HomePresenter(private val view: HomeContract.View,
 
                 override fun onNext(t: Account) {
                     view.showAccountUser(t)
+//                    view.menuChange()
                 }
 
                 override fun onError(t: Throwable?) {
@@ -36,26 +37,5 @@ class HomePresenter(private val view: HomeContract.View,
 
             }))
     }
-
-    override fun getSession(requestToken: RequestToken) {
-        compositeDisposable.add(loginRepoImpl.getSession(requestToken)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribeWith(object : ResourceSubscriber<Session>() {
-                override fun onComplete() {
-                    Log.d("Data", "Session complete")
-                }
-
-                override fun onNext(t: Session?) {
-                    view.showSessionId(t)
-                }
-
-                override fun onError(t: Throwable) {
-                    Log.e("Data", "Session error : " + t.message)
-                }
-
-            }))
-    }
-
 
 }

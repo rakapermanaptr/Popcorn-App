@@ -23,4 +23,5 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="raka">Raka Permana Putra</string>
+    <string name="logout">Logout</string>
 </resources>

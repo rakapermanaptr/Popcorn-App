@@ -16,6 +16,7 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.share
 import org.jetbrains.anko.startActivity
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
@@ -25,6 +26,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var login: Login
     private lateinit var requestToken: RequestToken
     private lateinit var sessionId: String
+
+    private lateinit var sharedPreference: SharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         presenter.getReqToken()
 
         //SharedPreference
-        val sharedPreference: SharedPreference = SharedPreference(this)
+        sharedPreference = SharedPreference(this)
 
         btnLogin.setOnClickListener {
             val username = edtUsername.text.toString()
@@ -47,12 +50,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
             login = Login(pass, token, username)
 
+            //Request
             presenter.getToken(login)
-
-//            presenter.getSession(requestToken)
-
-            sharedPreference.save("TOKEN", token)
-//            toast("session id : " + sessionId)
+            presenter.getSession(requestToken)
         }
     }
 
@@ -70,14 +70,17 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showToken(token: Token) {
+        val mToken = token.requestToken
+        sharedPreference.save("TOKEN", mToken)
         Log.d("Data", "Token : " + token.requestToken)
         Log.d("Data", "Token Acc ? " + token.success)
-        startActivity<HomeActivity>()
     }
 
     override fun showSessionId(session: Session) {
         sessionId = session.sessionId
-        Log.d("Data", "Session id : " + sessionId)
+        sharedPreference.save("SESSION_ID", sessionId)
+        Log.d("Data", "Session id from LoginAct: " + sessionId)
+        startActivity<HomeActivity>("sessionId" to sessionId)
     }
 
 }

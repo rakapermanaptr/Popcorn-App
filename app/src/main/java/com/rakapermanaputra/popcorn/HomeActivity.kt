@@ -1,6 +1,7 @@
 package com.rakapermanaputra.popcorn
 
 import android.os.Bundle
+import android.support.design.internal.NavigationMenu
 import android.support.design.internal.NavigationMenuView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -12,7 +13,9 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import com.rakapermanaputra.popcorn.db.SharedPreference
 import com.rakapermanaputra.popcorn.feature.discover.DiscoverFragment
@@ -29,6 +32,7 @@ import com.rakapermanaputra.popcorn.model.Token
 import com.rakapermanaputra.popcorn.model.repository.LoginRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
+import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -44,7 +48,14 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var presenter: HomePresenter
     private lateinit var sharedPreference: SharedPreference
     private lateinit var requestToken: RequestToken
-    private lateinit var session: Session
+    private var sessionId: String? = null
+
+    private lateinit var navigationView: NavigationView
+    private lateinit var headerView: View
+    private lateinit var tvUsername: TextView
+    private lateinit var menu: Menu
+    private lateinit var menuLogin: MenuItem
+    private lateinit var menuLogout: MenuItem
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,39 +76,50 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportFragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
         }
 
-        //SharedPref
+        //SharedPref Token
         sharedPreference = SharedPreference(this)
         val token = sharedPreference.getValueString("TOKEN")
         requestToken = RequestToken(token)
-        Log.d("Data", "token : " + token)
+        Log.d("Data", "token on sharedPref: " + token)
+
+        //SharedPref Session
+        sessionId = sharedPreference.getValueString("SESSION_ID")
+        Log.d("Data", "sessionId on sharedPref: " + sessionId)
 
         //Request
         val service = ApiService.getClient().create(ApiRest::class.java)
         val request = LoginRepoImpl(service)
         presenter = HomePresenter(this, request)
-        presenter.getSession(requestToken)
+        if (sessionId != null) presenter.getAccountUser(sessionId!!)
+
+        //Display username on NavHeader
+        navigationView = findViewById(R.id.nav_view)
+        headerView = navigationView.getHeaderView(0)
+        tvUsername = headerView.findViewById<TextView>(R.id.tvUsername)
+
+        //Setting Menu
+        menu = navigationView.menu
+        if (sessionId != null) {
+            menuLogin = menu.findItem(R.id.nav_login).setVisible(false)
+
+            menuLogout = menu.findItem(R.id.nav_logout).setVisible(true)
+        } else{
+            menuLogin = menu.findItem(R.id.nav_login).setVisible(true)
+
+            menuLogout = menu.findItem(R.id.nav_logout).setVisible(false)
+
+        }
 
     }
 
     override fun showAccountUser(userAccount: Account) {
         val userId = userAccount.id
-        sharedPreference.saveInt("SESSION_ID", userId)
+        sharedPreference.saveInt("ACCOUNT_ID", userId)
         toast("Hello, " + userAccount.username)
         Log.i("Data", "User id: " + userId)
-    }
 
-    override fun showSessionId(session: Session?) {
-        if (session?.sessionId == null) {
-            Log.d("Data", "Session is Null")
-        } else {
-            this.session = Session(session.sessionId, session.success)
-            Log.d("Data", "Session id : " + session?.sessionId)
-
-            presenter.getAccountUser(session.sessionId)
-//            val sessionId = session.sessionId
-//            sharedPreference.save("SESSION_ID", sessionId)
-//            toast("save session : " + sessionId)
-        }
+        //show username on NavHeader
+        tvUsername.text = userAccount.username
     }
 
     override fun onBackPressed() {
@@ -175,6 +197,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_login -> {
                 startActivity<LoginActivity>()
+            }
+            R.id.nav_logout -> {
+                sharedPreference.clearSharedPreference()
+                tvUsername.text = ""
+
+                menuLogin = menu.findItem(R.id.nav_login).setVisible(true)
+                menuLogout = menu.findItem(R.id.nav_logout).setVisible(false)
             }
         }
 
