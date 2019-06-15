@@ -47,8 +47,6 @@ class DetailActivity : AppCompatActivity(),
         sessionId = sharedPreference?.getValueString("SESSION_ID")
         accountId = sharedPreference?.getValueInt("ACCOUNT_ID")
 
-        Log.d("Data", "Detail act session and account id : " + sessionId + " and " + accountId)
-
         id = intent.getIntExtra("id", 0)
 
         val bundle = Bundle()
@@ -75,7 +73,6 @@ class DetailActivity : AppCompatActivity(),
         val request = DetailMovieRepoImpl(service)
         presenter = DetailMoviePresenter(this, request)
         presenter.getDetail(id)
-
 
         fab.setOnClickListener {
             if (accountId != 0) {

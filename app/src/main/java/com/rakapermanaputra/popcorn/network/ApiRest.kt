@@ -90,13 +90,17 @@ interface ApiRest {
 
     @Headers("Content-Type: application/json;charset=utf-8")
     @POST("account/{account_id}/favorite" + BuildConfig.API_KEY)
-    fun postFavoriteMovie(@Path("account_id") accountId: Int,
-                          @Query("session_id") sessionId: String,
-                          @Body reqFavBody: ReqFavBody) : Flowable<AddFavResponse>
+    fun postFavorite(@Path("account_id") accountId: Int,
+                     @Query("session_id") sessionId: String,
+                     @Body reqFavBody: ReqFavBody) : Flowable<AddFavResponse>
 
     @GET("account/{account_id}/favorite/movies" + BuildConfig.API_KEY)
     fun getFavoriteMovies(@Path("account_id") accountId: Int,
                           @Query("session_id") sessionId: String): Flowable<MoviesResponse>
+
+    @GET("account/{account_id}/favorite/tv" + BuildConfig.API_KEY)
+    fun getFavoriteTv(@Path("account_id") accountId: Int,
+                      @Query("session_id") sessionId: String): Flowable<TvShowsResponse>
 
 //    @GET("movie/now_playing" + BuildConfig.API_KEY)
 //    fun getDetailMovie() : Flowable<MoviesResponse>

@@ -1,8 +1,8 @@
-package com.rakapermanaputra.popcorn.feature.favorite
+package com.rakapermanaputra.popcorn.feature.favorite.movies
 
 import com.rakapermanaputra.popcorn.model.Movies
 
-interface FavoriteContract {
+interface FavMoviesContract {
 
     interface View {
         fun showLoading()

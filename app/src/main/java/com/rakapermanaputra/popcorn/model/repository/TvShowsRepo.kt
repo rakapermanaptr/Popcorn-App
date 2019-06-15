@@ -22,4 +22,8 @@ interface TvShowsRepo {
     fun getMovieCredits(id: Int): Flowable<CreditsResponse>
 
     fun getTvCredits(id: Int): Flowable<CreditsResponse>
+
+    fun postFavTv(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody): Flowable<AddFavResponse>
+
+    fun getFavTv(accountId: Int, sessionId: String): Flowable<TvShowsResponse>
 }

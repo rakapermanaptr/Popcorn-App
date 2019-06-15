@@ -1,7 +1,9 @@
 package com.rakapermanaputra.popcorn.feature.detail.detail_tv
 
 import android.util.Log
+import com.rakapermanaputra.popcorn.model.AddFavResponse
 import com.rakapermanaputra.popcorn.model.DetailTv
+import com.rakapermanaputra.popcorn.model.ReqFavBody
 import com.rakapermanaputra.popcorn.model.TvShowsDetail
 import com.rakapermanaputra.popcorn.model.repository.TvShowsRepoImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -38,6 +40,28 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
 
             }))
     }
+
+    override fun postFavTv(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody) {
+        compositeDisposable.add(tvShowsRepoImpl.postFavTv(accoundId, sessionId, reqFavBody)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribeWith(object : ResourceSubscriber<AddFavResponse>() {
+                override fun onComplete() {
+                    view.hideLoading()
+                }
+
+                override fun onNext(t: AddFavResponse) {
+                    view.showMessage(t)
+                }
+
+                override fun onError(t: Throwable?) {
+                    view.hideLoading()
+                    Log.e("Error", "Add favorite tv error : " + t?.message)
+                }
+
+            }))
+    }
+
 
     override fun onDestroy() {
         compositeDisposable.dispose()

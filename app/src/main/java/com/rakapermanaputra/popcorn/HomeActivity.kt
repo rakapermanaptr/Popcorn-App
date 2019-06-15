@@ -1,8 +1,6 @@
 package com.rakapermanaputra.popcorn
 
 import android.os.Bundle
-import android.support.design.internal.NavigationMenu
-import android.support.design.internal.NavigationMenuView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat

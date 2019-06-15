@@ -1,4 +1,4 @@
-package com.rakapermanaputra.popcorn.feature.favorite
+package com.rakapermanaputra.popcorn.feature.favorite.movies
 
 import android.util.Log
 import com.rakapermanaputra.popcorn.model.MoviesResponse
@@ -9,9 +9,9 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.ResourceSubscriber
 import java.util.*
 
-class FavoritePresenter(private val view: FavoriteContract.View,
-                        private val moviesRepoImpl: MoviesRepoImpl)
-    : FavoriteContract.Presenter {
+class FavMoviesPresenter(private val view: FavMoviesContract.View,
+                         private val moviesRepoImpl: MoviesRepoImpl)
+    : FavMoviesContract.Presenter {
 
     val compositeDisposable = CompositeDisposable()
 
