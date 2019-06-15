@@ -18,6 +18,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.share
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
@@ -80,7 +81,12 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         sessionId = session.sessionId
         sharedPreference.save("SESSION_ID", sessionId)
         Log.d("Data", "Session id from LoginAct: " + sessionId)
-        startActivity<HomeActivity>("sessionId" to sessionId)
+
+        startActivity<HomeActivity>()
+    }
+
+    override fun showMessage() {
+        toast("There is something wrong...")
     }
 
 }

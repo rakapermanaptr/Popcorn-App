@@ -10,6 +10,7 @@ interface LoginContract {
     interface View {
         fun showLoading()
         fun hideLoading()
+        fun showMessage()
         fun showReqToken(token: Token)
         fun showToken(token: Token)
         fun showSessionId(session: Session)

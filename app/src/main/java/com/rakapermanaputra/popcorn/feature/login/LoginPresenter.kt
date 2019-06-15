@@ -53,6 +53,7 @@ class LoginPresenter(private val view: LoginContract.View,
 
                 override fun onError(t: Throwable?) {
                     view.hideLoading()
+                    view.showMessage()
                     Log.d("Error", t?.message)
                 }
 

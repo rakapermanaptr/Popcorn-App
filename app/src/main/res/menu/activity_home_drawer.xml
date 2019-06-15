@@ -27,23 +27,29 @@
     </group>
 
     <group android:checkableBehavior="single"
-           android:id="@+id/group_reminder">
+           android:id="@+id/group_favorite">
 
         <item
-                android:id="@+id/nav_reminder"
-                android:icon="@drawable/ic_reminder"
-                android:title="@string/reminder"/>
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorite_border_black_24dp"
+            android:title="@string/favorite"/>
 
     </group>
 
-    <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/settings"
-            android:title="@string/login"/>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group_login">
 
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/settings"
-        android:title="@string/logout"/>
+        <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/settings"
+                android:title="@string/login"/>
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/settings"
+            android:title="@string/logout"/>
+
+    </group>
+
 
 </menu>

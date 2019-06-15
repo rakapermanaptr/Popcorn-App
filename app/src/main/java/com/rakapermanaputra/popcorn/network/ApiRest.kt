@@ -88,6 +88,16 @@ interface ApiRest {
     @GET("account" + BuildConfig.API_KEY)
     fun getAccount(@Query("session_id") sessionId: String): Flowable<Account>
 
+    @Headers("Content-Type: application/json;charset=utf-8")
+    @POST("account/{account_id}/favorite" + BuildConfig.API_KEY)
+    fun postFavoriteMovie(@Path("account_id") accountId: Int,
+                          @Query("session_id") sessionId: String,
+                          @Body reqFavBody: ReqFavBody) : Flowable<AddFavResponse>
+
+    @GET("account/{account_id}/favorite/movies" + BuildConfig.API_KEY)
+    fun getFavoriteMovies(@Path("account_id") accountId: Int,
+                          @Query("session_id") sessionId: String): Flowable<MoviesResponse>
+
 //    @GET("movie/now_playing" + BuildConfig.API_KEY)
 //    fun getDetailMovie() : Flowable<MoviesResponse>
 }

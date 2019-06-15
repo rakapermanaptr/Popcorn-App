@@ -6,8 +6,6 @@ import android.support.design.internal.NavigationMenuView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
-import android.support.v4.view.MenuCompat
-import android.support.v4.view.MenuItemCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -16,31 +14,22 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import android.widget.TextView
-import android.widget.Toast
 import com.rakapermanaputra.popcorn.db.SharedPreference
 import com.rakapermanaputra.popcorn.feature.discover.DiscoverFragment
+import com.rakapermanaputra.popcorn.feature.favorite.FavoriteFragment
 import com.rakapermanaputra.popcorn.feature.home.HomeFragment
 import com.rakapermanaputra.popcorn.feature.login.LoginActivity
-//import com.rakapermanaputra.popcorn.feature.home.HomeFragment
 import com.rakapermanaputra.popcorn.feature.movies.MoviesFragment
 import com.rakapermanaputra.popcorn.feature.popular_people.PopularPeopleFragment
 import com.rakapermanaputra.popcorn.feature.tvshows.TvShowsFragment
 import com.rakapermanaputra.popcorn.model.Account
 import com.rakapermanaputra.popcorn.model.RequestToken
-import com.rakapermanaputra.popcorn.model.Session
-import com.rakapermanaputra.popcorn.model.Token
 import com.rakapermanaputra.popcorn.model.repository.LoginRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
-import com.rakapermanaputra.popcorn.utils.invisible
-import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import org.jetbrains.anko.find
-import org.jetbrains.anko.share
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HomeContract.View {
@@ -56,7 +45,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var menu: Menu
     private lateinit var menuLogin: MenuItem
     private lateinit var menuLogout: MenuItem
-
+    private lateinit var menuFavorite: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,12 +91,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (sessionId != null) {
             menuLogin = menu.findItem(R.id.nav_login).setVisible(false)
 
+            menuFavorite = menu.findItem(R.id.nav_favorite).setVisible(true)
+
             menuLogout = menu.findItem(R.id.nav_logout).setVisible(true)
         } else{
             menuLogin = menu.findItem(R.id.nav_login).setVisible(true)
 
-            menuLogout = menu.findItem(R.id.nav_logout).setVisible(false)
+            menuFavorite = menu.findItem(R.id.nav_favorite).setVisible(false)
 
+            menuLogout = menu.findItem(R.id.nav_logout).setVisible(false)
         }
 
     }
@@ -126,7 +118,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            finishAffinity()
         }
     }
 
@@ -191,9 +183,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragment = PopularPeopleFragment()
 
             }
-            R.id.nav_reminder -> {
-                toast("Reminder")
-
+            R.id.nav_favorite ->{
+                fragment = FavoriteFragment()
+                toast("Favorite")
             }
             R.id.nav_login -> {
                 startActivity<LoginActivity>()
@@ -203,6 +195,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 tvUsername.text = ""
 
                 menuLogin = menu.findItem(R.id.nav_login).setVisible(true)
+                menuFavorite = menu.findItem(R.id.nav_favorite).setVisible(false)
                 menuLogout = menu.findItem(R.id.nav_logout).setVisible(false)
             }
         }

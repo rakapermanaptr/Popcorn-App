@@ -5,7 +5,8 @@ import com.rakapermanaputra.popcorn.network.ApiRest
 import io.reactivex.Flowable
 
 class MoviesRepoImpl(private val apiRest: ApiRest) : MoviesRepo {
-//    override fun getDetailMovie(id: String): Flowable<DetailMovie> = apiRest.
+    override fun getFavoriteMovies(accountId: Int, sessionId: String): Flowable<MoviesResponse> = apiRest.getFavoriteMovies(accountId, sessionId)
+
     override fun getDiscoverMovies(): Flowable<MoviesResponse> = apiRest.getDiscoverMovie()
 
     override fun getUpcoming(): Flowable<MoviesResponse> = apiRest.getUpcomingMovies()
@@ -13,8 +14,6 @@ class MoviesRepoImpl(private val apiRest: ApiRest) : MoviesRepo {
     override fun getTopRated(): Flowable<MoviesResponse> = apiRest.getTopRatedMovies()
 
     override fun getPopular(): Flowable<MoviesResponse> = apiRest.getPopularMovies()
-
-//    override fun getNowPlaying(page: Int): Flowable<MoviesResponse> = apiRest.getNowPlayingMovies(page)
 
     override fun getNowPlaying(): Flowable<MoviesResponse> = apiRest.getNowPlayingMovies()
 

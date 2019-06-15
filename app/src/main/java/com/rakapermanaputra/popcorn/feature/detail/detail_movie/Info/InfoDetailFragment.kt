@@ -55,7 +55,9 @@ class InfoDetailFragment : Fragment(), InfoDetailContract.View {
     override fun showDetail(detail: DetailMovie) {
         tvRate.text = detail.vote_average.toString()
         tvOverview.text = detail.overview
-        tvOverview.setOnClickListener { tvOverview.maxLines = 99 }
+        tvOverview.setOnClickListener {
+            if (tvOverview.maxLines == 2) tvOverview.maxLines = 99 else tvOverview.maxLines = 2
+        }
         tvOriginalTitle.text = detail.original_title
         tvOriginalLanguage.text = detail.original_language
         tvBudget.text = detail.budget.toString()

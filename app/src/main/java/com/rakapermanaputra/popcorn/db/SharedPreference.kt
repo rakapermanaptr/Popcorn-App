@@ -23,6 +23,10 @@ class SharedPreference(val context: Context) {
         return sharedPref.getString(KEY_NAME, null)
     }
 
+    fun getValueInt(KEY_NAME: String): Int {
+        return sharedPref.getInt(KEY_NAME, 0)
+    }
+
     fun clearSharedPreference() {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.clear()

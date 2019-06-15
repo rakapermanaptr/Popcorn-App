@@ -17,5 +17,7 @@ interface MoviesRepo {
 
     fun getDiscoverMovies(): Flowable<MoviesResponse>
 
+    fun getFavoriteMovies(accountId: Int, sessionId: String): Flowable<MoviesResponse>
+
 //    fun getDetailMovie(id: String): Flowable<DetailMovie>
 }

@@ -15,4 +15,6 @@ interface DetailMovieRepo {
     fun getCaster(id: Int) : Flowable<CastResponse>
 
     fun getReview(id: Int) : Flowable<ReviewResponse>
+
+    fun postFavMovie(accountId: Int, sessionId: String, reqFavBody: ReqFavBody) : Flowable<AddFavResponse>
 }

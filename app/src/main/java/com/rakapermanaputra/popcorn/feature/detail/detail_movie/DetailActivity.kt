@@ -2,20 +2,29 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_movie
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import com.rakapermanaputra.popcorn.adapter.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 import com.bumptech.glide.Glide
 import com.rakapermanaputra.popcorn.R
+import com.rakapermanaputra.popcorn.db.SharedPreference
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.Info.InfoDetailFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.cast.CastMovieFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.reviews.ReviewsMovieFragment
+import com.rakapermanaputra.popcorn.model.AddFavResponse
 import com.rakapermanaputra.popcorn.model.DetailMovie
+import com.rakapermanaputra.popcorn.model.ReqFavBody
 import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
+import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.share
+import org.jetbrains.anko.toast
 
 
 class DetailActivity : AppCompatActivity(),
@@ -23,11 +32,24 @@ class DetailActivity : AppCompatActivity(),
 
     private lateinit var presenter: DetailMoviePresenter
 
+    private var id: Int = 0
+
+    private lateinit var sharedPreference: SharedPreference
+    private var sessionId: String? = null
+    private var accountId: Int? = null
+    private lateinit var reqFavBody: ReqFavBody
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val id = intent.getIntExtra("id", 0)
+        sharedPreference = SharedPreference(this)
+        sessionId = sharedPreference?.getValueString("SESSION_ID")
+        accountId = sharedPreference?.getValueInt("ACCOUNT_ID")
+
+        Log.d("Data", "Detail act session and account id : " + sessionId + " and " + accountId)
+
+        id = intent.getIntExtra("id", 0)
 
         val bundle = Bundle()
         bundle.putInt("id", id)
@@ -54,6 +76,25 @@ class DetailActivity : AppCompatActivity(),
         presenter = DetailMoviePresenter(this, request)
         presenter.getDetail(id)
 
+
+        fab.setOnClickListener {
+            if (accountId != 0) {
+                reqFavBody = ReqFavBody(true, id, "movie")
+                presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
+                it.snackbar("Added to favorite")
+            } else {
+                it.snackbar("You must login first")
+            }
+        }
+
+    }
+
+    override fun showLoading() {
+        progressBar.visible()
+    }
+
+    override fun hideLoading() {
+        progressBar.invisible()
     }
 
     override fun showBackdrop(detailMovie: DetailMovie) {
@@ -78,12 +119,10 @@ class DetailActivity : AppCompatActivity(),
         }
     }
 
-    override fun showLoading() {
-        progressBar.visible()
-    }
+    override fun showMessage(addFavResponse: AddFavResponse) {
+        Log.d("Data", "status favorite : " + addFavResponse.statusMessage)
 
-    override fun hideLoading() {
-        progressBar.invisible()
+        fab.setImageResource(R.drawable.ic_favorite_white_24dp)
     }
 
     override fun onDestroy() {

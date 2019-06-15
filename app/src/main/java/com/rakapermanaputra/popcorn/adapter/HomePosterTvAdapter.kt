@@ -9,6 +9,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.DetailActivity
+import com.rakapermanaputra.popcorn.feature.detail.detail_tv.DetailTvActivity
 import com.rakapermanaputra.popcorn.model.Movies
 import com.rakapermanaputra.popcorn.model.TvShows
 import kotlinx.android.synthetic.main.item_home_poster.view.*
@@ -43,7 +44,7 @@ class HomePosterTvViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.setOnClickListener {
             val id = tvshows.id
 
-            itemView.context.startActivity<DetailActivity>("id" to id)
+            itemView.context.startActivity<DetailTvActivity>("id" to id)
         }
 
     }

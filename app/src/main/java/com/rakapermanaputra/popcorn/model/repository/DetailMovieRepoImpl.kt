@@ -5,6 +5,7 @@ import com.rakapermanaputra.popcorn.network.ApiRest
 import io.reactivex.Flowable
 
 class DetailMovieRepoImpl(private val apiRest: ApiRest): DetailMovieRepo {
+    override fun postFavMovie(accountId: Int, sessionId: String, reqFavBody: ReqFavBody): Flowable<AddFavResponse> = apiRest.postFavoriteMovie(accountId, sessionId, reqFavBody)
 
     override fun getReview(id: Int): Flowable<ReviewResponse> = apiRest.getReview(id)
 
