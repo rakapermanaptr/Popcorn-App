@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import com.bumptech.glide.Glide
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.db.SharedPreference
+import com.rakapermanaputra.popcorn.db.favorite.Favorite
+import com.rakapermanaputra.popcorn.db.favorite.database
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.Info.InfoDetailFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.cast.CastMovieFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.reviews.ReviewsMovieFragment
@@ -18,17 +20,19 @@ import com.rakapermanaputra.popcorn.model.AddFavResponse
 import com.rakapermanaputra.popcorn.model.DetailMovie
 import com.rakapermanaputra.popcorn.model.ReqFavBody
 import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
+import com.rakapermanaputra.popcorn.model.repository.LocalRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.share
 import org.jetbrains.anko.toast
 
 
-class DetailActivity : AppCompatActivity(),
-    DetailContract.View {
+class DetailActivity : AppCompatActivity(), DetailContract.View {
 
     private lateinit var presenter: DetailMoviePresenter
 
@@ -38,6 +42,8 @@ class DetailActivity : AppCompatActivity(),
     private var sessionId: String? = null
     private var accountId: Int? = null
     private lateinit var reqFavBody: ReqFavBody
+
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,14 +77,27 @@ class DetailActivity : AppCompatActivity(),
 
         val service = ApiService.getClient().create(ApiRest::class.java)
         val request = DetailMovieRepoImpl(service)
-        presenter = DetailMoviePresenter(this, request)
+        val localRepoImpl = LocalRepoImpl(applicationContext)
+        presenter = DetailMoviePresenter(this, request, localRepoImpl)
         presenter.getDetail(id)
+
+        favoriteState()
+        setFavorite()
 
         fab.setOnClickListener {
             if (accountId != 0) {
-                reqFavBody = ReqFavBody(true, id, "movie")
-                presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
-                it.snackbar("Added to favorite")
+                if (!isFavorite) {
+                    reqFavBody = ReqFavBody(true, id, "movie")
+                    presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
+                    presenter.insertFavorite(id)
+                    it.snackbar("Added to favorite")
+
+                    isFavorite = !isFavorite
+                } else {
+                    presenter.deleteFavorite(id)
+                    it.snackbar("Removed from favorite")
+                    isFavorite = !isFavorite
+                }
             } else {
                 it.snackbar("You must login first")
             }
@@ -120,6 +139,27 @@ class DetailActivity : AppCompatActivity(),
         Log.d("Data", "status favorite : " + addFavResponse.statusMessage)
 
         fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+    }
+
+    override fun setFavoriteState(favList: List<Favorite>) {
+        if (!favList.isEmpty()) isFavorite = true
+    }
+
+    private fun setFavorite() {
+        if (isFavorite)
+            fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+        else
+            fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
+    }
+
+    private fun favoriteState() {
+        database.use {
+            val result = select(Favorite.TABLE_FAVORITE)
+                .whereArgs("MOVIE_ID = {id}",
+                    "id" to id)
+            val favorite = result.parseList(classParser<Favorite>())
+            if (!favorite.isEmpty()) isFavorite = true
+        }
     }
 
     override fun onDestroy() {

@@ -5,14 +5,24 @@ import com.rakapermanaputra.popcorn.model.AddFavResponse
 import com.rakapermanaputra.popcorn.model.DetailMovie
 import com.rakapermanaputra.popcorn.model.ReqFavBody
 import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
+import com.rakapermanaputra.popcorn.model.repository.LocalRepoImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.ResourceSubscriber
 
 class DetailMoviePresenter(private val view: DetailContract.View,
-                           private val detailMovieRepoImpl: DetailMovieRepoImpl)
+                           private val detailMovieRepoImpl: DetailMovieRepoImpl,
+                           private val localRepoImpl: LocalRepoImpl)
     : DetailContract.Presenter {
+    override fun insertFavorite(movieId: Int) {
+        localRepoImpl.insertFavMovie(movieId)
+    }
+
+    override fun deleteFavorite(movieId: Int) {
+        localRepoImpl.deleteFavMovie(movieId)
+    }
+
 
     val compositeDisposable = CompositeDisposable()
 
