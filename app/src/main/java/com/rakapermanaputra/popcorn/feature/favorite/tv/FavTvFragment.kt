@@ -36,13 +36,15 @@ class FavTvFragment : Fragment(), FavTvContract.View {
     private var favTv: MutableList<TvShows> = mutableListOf()
 
     private lateinit var sharedPreference: SharedPreference
+    private var accountId: Int = 0
+    private lateinit var sessionId : String
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         sharedPreference = SharedPreference(requireContext())
-        val accountId = sharedPreference.getValueInt("ACCOUNT_ID")
-        val sessionId = sharedPreference.getValueString("SESSION_ID")
+        accountId = sharedPreference.getValueInt("ACCOUNT_ID")
+        sessionId = sharedPreference.getValueString("SESSION_ID")!!
 
         val service = ApiService.getClient().create(ApiRest::class.java)
         val request = TvShowsRepoImpl(service)
@@ -71,6 +73,11 @@ class FavTvFragment : Fragment(), FavTvContract.View {
         } else {
             toast("There is no favorite tv shows")
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.getFavoriteTv(accountId, sessionId!!)
     }
 
     override fun onCreateView(

@@ -102,6 +102,14 @@ interface ApiRest {
     fun getFavoriteTv(@Path("account_id") accountId: Int,
                       @Query("session_id") sessionId: String): Flowable<TvShowsResponse>
 
+    @GET("movie/{movie_id}/account_states" + BuildConfig.API_KEY)
+    fun getMovieState(@Path("movie_id") movieId: Int,
+                        @Query("session_id") sessionId: String): Flowable<AccountStateResponse>
+
+    @GET("tv/{tv_id}/account_states" + BuildConfig.API_KEY)
+    fun getTvState(@Path("tv_id") tvId: Int,
+                   @Query("session_id") sessionId: String): Flowable<AccountStateResponse>
+
 //    @GET("movie/now_playing" + BuildConfig.API_KEY)
 //    fun getDetailMovie() : Flowable<MoviesResponse>
 }

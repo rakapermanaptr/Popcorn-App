@@ -1,9 +1,6 @@
 package com.rakapermanaputra.popcorn.feature.detail.detail_tv
 
-import com.rakapermanaputra.popcorn.model.AddFavResponse
-import com.rakapermanaputra.popcorn.model.DetailTv
-import com.rakapermanaputra.popcorn.model.ReqFavBody
-import com.rakapermanaputra.popcorn.model.TvShowsDetail
+import com.rakapermanaputra.popcorn.model.*
 
 interface DetailTvContract {
 
@@ -12,11 +9,13 @@ interface DetailTvContract {
         fun hideLoading()
         fun showDetail(dataDetail: TvShowsDetail)
         fun showMessage(addFavResponse: AddFavResponse)
+        fun showAccountStates(states: AccountStateResponse)
     }
 
     interface Presenter {
         fun getDetail(id: Int)
         fun postFavTv(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody)
+        fun getTvState(tvId: Int, sessionId: String)
         fun onDestroy()
     }
 }

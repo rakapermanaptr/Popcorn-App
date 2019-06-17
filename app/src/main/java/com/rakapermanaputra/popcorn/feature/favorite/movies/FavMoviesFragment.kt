@@ -72,6 +72,11 @@ class FavMoviesFragment : Fragment(), FavMoviesContract.View {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.getFavoriteMovies(accountId, sessionId)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

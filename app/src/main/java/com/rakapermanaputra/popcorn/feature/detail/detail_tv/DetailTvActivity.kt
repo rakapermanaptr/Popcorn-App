@@ -11,10 +11,7 @@ import com.rakapermanaputra.popcorn.db.SharedPreference
 import com.rakapermanaputra.popcorn.feature.detail.detail_tv.actors.ActorsTvFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_tv.info.InfoDetailTvFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_tv.seasons.SeasonsTvFragment
-import com.rakapermanaputra.popcorn.model.AddFavResponse
-import com.rakapermanaputra.popcorn.model.DetailTv
-import com.rakapermanaputra.popcorn.model.ReqFavBody
-import com.rakapermanaputra.popcorn.model.TvShowsDetail
+import com.rakapermanaputra.popcorn.model.*
 import com.rakapermanaputra.popcorn.model.repository.TvShowsRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
@@ -33,6 +30,7 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
     private var accountId: Int? = 0
     private  var sessionId: String? = null
     private lateinit var reqFavBody: ReqFavBody
+    private lateinit var states: AccountStateResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,21 +62,30 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
 
+        //request
         val service = ApiService.getClient().create(ApiRest::class.java)
         val request = TvShowsRepoImpl(service)
         presenter = DetailTvPresenter(this, request)
         presenter.getDetail(id)
+        if (sessionId != null) presenter.getTvState(id, sessionId!!)
 
-        //fab
+        //fab listener
         fab.setOnClickListener {
             if (accountId != 0) {
-                reqFavBody = ReqFavBody(true, id, "tv")
-                presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
-                it.snackbar("Added to favorite")
+                if (states.favorite == true) {
+                    reqFavBody = ReqFavBody(false, id, "tv")
+                    presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
+
+                    fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
+                    it.snackbar("Deleted from favorite")
+                } else {
+                    reqFavBody = ReqFavBody(true, id, "tv")
+                    presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
+                    it.snackbar("Added to favorite")
+                }
             } else {
                 it.snackbar("You must login first")
             }
-
         }
     }
 
@@ -106,9 +113,23 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
     }
 
     override fun showMessage(addFavResponse: AddFavResponse) {
-        Log.i("Data" , "Added to favorite message : " + addFavResponse.statusMessage)
+        Log.d("Data", "status favorite : " + addFavResponse.statusMessage)
+
+        val deleteStatus = "The item/record was deleted successfully."
+        if (addFavResponse.statusMessage == deleteStatus) fab.setImageResource(R.drawable.ic_favorite_border_white_24dp) else
+            fab.setImageResource(R.drawable.ic_favorite_white_24dp)
     }
 
+    override fun showAccountStates(states: AccountStateResponse) {
+        Log.i("Data", "State movie : " + states.favorite)
+        this.states = AccountStateResponse(states.favorite,
+            states.id,
+            states.rated,
+            states.watchlist)
+        var isFavorite = states.favorite
+        if (isFavorite == true) fab.setImageResource(R.drawable.ic_favorite_white_24dp) else
+            fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

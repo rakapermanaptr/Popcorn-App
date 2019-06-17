@@ -26,4 +26,7 @@ interface TvShowsRepo {
     fun postFavTv(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody): Flowable<AddFavResponse>
 
     fun getFavTv(accountId: Int, sessionId: String): Flowable<TvShowsResponse>
+
+    fun getTvState(tvId: Int, sessionId: String): Flowable<AccountStateResponse>
+
 }
