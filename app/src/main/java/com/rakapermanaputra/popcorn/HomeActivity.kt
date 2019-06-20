@@ -19,6 +19,7 @@ import com.rakapermanaputra.popcorn.feature.home.HomeFragment
 import com.rakapermanaputra.popcorn.feature.login.LoginActivity
 import com.rakapermanaputra.popcorn.feature.movies.MoviesFragment
 import com.rakapermanaputra.popcorn.feature.popular_people.PopularPeopleFragment
+import com.rakapermanaputra.popcorn.feature.search.SearchActivity
 import com.rakapermanaputra.popcorn.feature.tvshows.TvShowsFragment
 import com.rakapermanaputra.popcorn.model.Account
 import com.rakapermanaputra.popcorn.model.RequestToken
@@ -126,11 +127,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
 
-        searchView.queryHint = "Search Movie"
+        searchView.queryHint = "Search..."
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                toast("query : " + query)
+                startActivity<SearchActivity>("query" to query)
 
                 return false
             }

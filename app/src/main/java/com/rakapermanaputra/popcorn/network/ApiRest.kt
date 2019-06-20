@@ -110,6 +110,9 @@ interface ApiRest {
     fun getTvState(@Path("tv_id") tvId: Int,
                    @Query("session_id") sessionId: String): Flowable<AccountStateResponse>
 
+    @GET("search/multi" + BuildConfig.API_KEY)
+    fun getSearch(@Query("query") query: String): Flowable<SearchResponse>
+
 //    @GET("movie/now_playing" + BuildConfig.API_KEY)
 //    fun getDetailMovie() : Flowable<MoviesResponse>
 }

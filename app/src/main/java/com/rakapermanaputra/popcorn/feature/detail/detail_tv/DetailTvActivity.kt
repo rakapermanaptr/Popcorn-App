@@ -18,9 +18,7 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_detail_tv.*
-import org.jetbrains.anko.act
 import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.toast
 
 class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
 
@@ -36,18 +34,17 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_tv)
 
-        val id = intent.getIntExtra("id", 0)
-
         sharedPreference = SharedPreference(this)
         accountId = sharedPreference?.getValueInt("ACCOUNT_ID")
         sessionId = sharedPreference?.getValueString("SESSION_ID")
 
+        val id = intent.getIntExtra("id", 0)
+        val bundle = Bundle()
+        bundle.putInt("id", id)
+
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val bundle = Bundle()
-        bundle.putInt("id", id)
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
         val infoDetailTvFragment = InfoDetailTvFragment()

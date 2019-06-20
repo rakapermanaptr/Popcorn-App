@@ -28,7 +28,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.rakapermanaptr.movie.MainActivity"
-        tools:showIn="@layout/app_bar_home"></FrameLayout>
+        tools:showIn="@layout/app_bar_home"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="wrap_content"
