@@ -42,9 +42,7 @@ class PeopleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.tvName.text = people.name
 
         itemView.setOnClickListener {
-            val id: Int = people.id
-            itemView.context.startActivity<DetailPeopleActivity>("id" to id)
-            Log.d("Data", "id people : " + id)
+            itemView.context.startActivity<DetailPeopleActivity>("id" to people.id)
         }
 
     }

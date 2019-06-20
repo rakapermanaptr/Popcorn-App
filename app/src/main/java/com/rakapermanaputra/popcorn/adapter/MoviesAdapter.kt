@@ -45,12 +45,7 @@ class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         Log.i("Data : " , "movie title : " + movies.title)
 
         itemView.setOnClickListener {
-            val id = movies.id
-
-            val intent = Intent(itemView.context, DetailActivity::class.java)
-            intent.putExtra("id", id)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            itemView.context.startActivity(intent)
+            itemView.context.startActivity<DetailActivity>("id" to movies.id)
         }
 
     }

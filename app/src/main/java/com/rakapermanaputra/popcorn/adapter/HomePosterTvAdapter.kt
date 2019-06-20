@@ -42,9 +42,7 @@ class HomePosterTvViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.tvTitle.text = tvshows.originalName
 
         itemView.setOnClickListener {
-            val id = tvshows.id
-
-            itemView.context.startActivity<DetailTvActivity>("id" to id)
+            itemView.context.startActivity<DetailTvActivity>("id" to tvshows.id)
         }
 
     }

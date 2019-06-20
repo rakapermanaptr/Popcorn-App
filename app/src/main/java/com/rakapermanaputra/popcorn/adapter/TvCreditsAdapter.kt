@@ -56,9 +56,7 @@ class TvCreditsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         Log.i("Data : ", "movie title : " + movieCredits.title)
 
         itemView.setOnClickListener {
-            val id = movieCredits.id
-
-            itemView.context.startActivity<DetailActivity>("id" to id)
+            itemView.context.startActivity<DetailActivity>("id" to movieCredits.id)
         }
 
     }

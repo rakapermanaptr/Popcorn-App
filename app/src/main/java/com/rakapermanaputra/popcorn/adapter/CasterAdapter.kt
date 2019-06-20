@@ -46,10 +46,7 @@ class CasterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.tvCharacter.text = "as " + cast.character
 
         itemView.setOnClickListener {
-            val id = cast.id
-            itemView.context.startActivity<DetailPeopleActivity>("id" to id)
-            Log.i("Data", "actors id: " + cast.id )
-
+            itemView.context.startActivity<DetailPeopleActivity>("id" to cast.id)
         }
 
     }

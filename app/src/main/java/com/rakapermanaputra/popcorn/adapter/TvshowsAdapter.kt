@@ -46,12 +46,8 @@ class TvshowsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.tvRate.text = tvShows.voteAverage.toString()
 
         itemView.setOnClickListener {
-            val id = tvShows.id
+            itemView.context.startActivity<DetailActivity>("id" to tvShows.id)
 
-            val intent = Intent(itemView.context, DetailTvActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.putExtra("id", id)
-            itemView.context.startActivity(intent)
         }
 
     }

@@ -48,10 +48,8 @@ class TvSeasonsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.setOnClickListener {
             val id = season.id
 
-            itemView.context.toast("tv season id: " + id)
+            itemView.context.toast("tv season id: " + id + " upcoming")
 //            itemView.context.startActivity<DetailTvActivity>("id" to id)
-//
-//            Log.d("Data", "id tv season : " + id )
         }
 
     }

@@ -39,9 +39,7 @@ class RecommendationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.tvTitle.text = recommendationMovie.title
 
         itemView.setOnClickListener {
-            val id = recommendationMovie.id
-
-            itemView.context.startActivity<DetailActivity>("id" to id)
+            itemView.context.startActivity<DetailActivity>("id" to recommendationMovie.id)
         }
 
     }

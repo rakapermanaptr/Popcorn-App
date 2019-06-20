@@ -48,12 +48,7 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             itemView.tvRate.text = search.voteAverage.toString()
 
             itemView.setOnClickListener {
-                val id = search.id
-
-                val intent = Intent(itemView.context, DetailTvActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("id", id)
-                itemView.context.startActivity(intent)
+                itemView.context.startActivity<DetailTvActivity>("id" to search.id)
             }
         } else {
             itemView.tvTitle.text = search.title
@@ -61,29 +56,8 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             itemView.tvRate.text = search.voteAverage.toString()
 
             itemView.setOnClickListener {
-                val id = search.id
-
-                val intent = Intent(itemView.context, DetailActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("id", id)
-                itemView.context.startActivity(intent)
+                itemView.context.startActivity<DetailActivity>("id" to search.id)
             }
         }
-
-
-
-//        itemView.tvRate.text = movies.voteAverage.toString()
-
-//        Log.i("Data : " , "movie title : " + movies.title)
-//
-//        itemView.setOnClickListener {
-//            val id = movies.id
-//
-//            val intent = Intent(itemView.context, DetailActivity::class.java)
-//            intent.putExtra("id", id)
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            itemView.context.startActivity(intent)
-//        }
-
     }
 }
