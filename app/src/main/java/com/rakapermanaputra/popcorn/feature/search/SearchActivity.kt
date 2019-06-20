@@ -16,7 +16,6 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_search.*
-import org.jetbrains.anko.toast
 
 class SearchActivity : AppCompatActivity(), SearchContract.View {
 
@@ -28,7 +27,6 @@ class SearchActivity : AppCompatActivity(), SearchContract.View {
         setContentView(R.layout.activity_search)
 
         val query = intent.getStringExtra("query")
-//        toast("query : " + query)
 
         val service = ApiService.getClient().create(ApiRest::class.java)
         val request = SearchRepoImpl(service)
