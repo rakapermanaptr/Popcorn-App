@@ -51,7 +51,7 @@ class DetailMoviePresenter(private val view: DetailContract.View,
 
                 override fun onNext(t: AddFavResponse) {
                     view.hideLoading()
-                    view.showMessage(t)
+                    view.markFavorite(t)
                 }
 
                 override fun onError(t: Throwable?) {
@@ -62,7 +62,6 @@ class DetailMoviePresenter(private val view: DetailContract.View,
     }
 
     override fun getMovieState(movieId: Int, sessionId: String) {
-        view.showLoading()
         compositeDisposable.add(detailMovieRepoImpl.getMovieState(movieId, sessionId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -72,12 +71,11 @@ class DetailMoviePresenter(private val view: DetailContract.View,
                 }
 
                 override fun onNext(t: AccountStateResponse) {
-                    view.showAccountStates(t)
+                    view.showFavoriteState(t.favorite)
                 }
 
                 override fun onError(t: Throwable?) {
                     view.hideLoading()
-                    Log.e("Error", "Error account state : " + t?.message)
                 }
 
             }))

@@ -1,5 +1,6 @@
 package com.rakapermanaputra.popcorn.feature.detail.detail_movie
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.toast
 
 
 class DetailActivity : AppCompatActivity(), DetailContract.View {
@@ -34,7 +36,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     private var sessionId: String? = null
     private var accountId: Int? = null
     private lateinit var reqFavBody: ReqFavBody
-    private lateinit var states: AccountStateResponse
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,21 +77,24 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         //fab listener
         fab.setOnClickListener {
             if (accountId != 0) {
-                if (states.favorite == true) {
-                    reqFavBody = ReqFavBody(false, id, "movie")
-                    presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
-
-                    fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
-                    it.snackbar("Deleted from favorite")
-                } else {
+                if (isFavorite == false) {
                     reqFavBody = ReqFavBody(true, id, "movie")
                     presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
+                    isFavorite = true
                     it.snackbar("Added to favorite")
+                    fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+                } else {
+                    reqFavBody = ReqFavBody(false, id, "movie")
+                    presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
+                    isFavorite = false
+                    it.snackbar("Removed from favorite")
+                    fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
                 }
             } else {
                 it.snackbar("You must login first")
             }
         }
+
     }
 
     override fun showLoading() {
@@ -122,23 +127,22 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         }
     }
 
-    override fun showMessage(addFavResponse: AddFavResponse) {
+    override fun markFavorite(addFavResponse: AddFavResponse) {
         Log.d("Data", "status favorite : " + addFavResponse.statusMessage)
 
-        val deleteStatus = "The item/record was deleted successfully."
-        if (addFavResponse.statusMessage == deleteStatus) fab.setImageResource(R.drawable.ic_favorite_border_white_24dp) else
-            fab.setImageResource(R.drawable.ic_favorite_white_24dp)
     }
 
-    override fun showAccountStates(states: AccountStateResponse) {
-        Log.i("Data", "State movie : " + states.favorite)
-        this.states = AccountStateResponse(states.favorite,
-            states.id,
-            states.rated,
-            states.watchlist)
-        var isFavorite = states.favorite
-        if (isFavorite == true) fab.setImageResource(R.drawable.ic_favorite_white_24dp) else
-            fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
+    override fun showFavoriteState(state: Boolean) {
+        isFavorite = state
+
+        if (isFavorite == true) fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+
+        Log.d("Favorite", "favorite state : " + isFavorite)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("Data", "State movie : resume")
     }
 
     override fun onDestroy() {

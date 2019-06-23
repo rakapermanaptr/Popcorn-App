@@ -13,8 +13,8 @@ interface DetailContract {
         fun showDetail(detailMovie: DetailMovie)
         fun showLoading()
         fun hideLoading()
-        fun showMessage(addFavResponse: AddFavResponse)
-        fun showAccountStates(states: AccountStateResponse)
+        fun markFavorite(addFavResponse: AddFavResponse)
+        fun showFavoriteState(state: Boolean)
     }
 
     interface Presenter {
