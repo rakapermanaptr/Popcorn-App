@@ -26,9 +26,9 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
 
     private lateinit var sharedPreference: SharedPreference
     private var accountId: Int? = 0
-    private  var sessionId: String? = null
+    private var sessionId: String? = null
     private lateinit var reqFavBody: ReqFavBody
-    private lateinit var states: AccountStateResponse
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,16 +69,18 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
         //fab listener
         fab.setOnClickListener {
             if (accountId != 0) {
-                if (states.favorite == true) {
-                    reqFavBody = ReqFavBody(false, id, "tv")
-                    presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
-
-                    fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
-                    it.snackbar("Deleted from favorite")
-                } else {
+                if (isFavorite == false) {
                     reqFavBody = ReqFavBody(true, id, "tv")
                     presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
+                    isFavorite = true
                     it.snackbar("Added to favorite")
+                    fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+                } else {
+                    reqFavBody = ReqFavBody(false, id, "tv")
+                    presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
+                    isFavorite = false
+                    it.snackbar("Removed from favorite")
+                    fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
                 }
             } else {
                 it.snackbar("You must login first")
@@ -109,23 +111,17 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
         tvTitle.text = dataDetail.original_name
     }
 
-    override fun showMessage(addFavResponse: AddFavResponse) {
+    override fun markFavorite(addFavResponse: AddFavResponse) {
         Log.d("Data", "status favorite : " + addFavResponse.statusMessage)
 
-        val deleteStatus = "The item/record was deleted successfully."
-        if (addFavResponse.statusMessage == deleteStatus) fab.setImageResource(R.drawable.ic_favorite_border_white_24dp) else
-            fab.setImageResource(R.drawable.ic_favorite_white_24dp)
     }
 
-    override fun showAccountStates(states: AccountStateResponse) {
-        Log.i("Data", "State movie : " + states.favorite)
-        this.states = AccountStateResponse(states.favorite,
-            states.id,
-            states.rated,
-            states.watchlist)
-        var isFavorite = states.favorite
-        if (isFavorite == true) fab.setImageResource(R.drawable.ic_favorite_white_24dp) else
-            fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
+    override fun showFavoriteState(state: Boolean) {
+        isFavorite = state
+
+        if (isFavorite == true) fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+
+        Log.d("Favorite", "favorite state : " + isFavorite)
     }
 
     override fun onDestroy() {

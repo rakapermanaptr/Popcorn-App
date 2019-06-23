@@ -8,8 +8,8 @@ interface DetailTvContract {
         fun showLoading()
         fun hideLoading()
         fun showDetail(dataDetail: TvShowsDetail)
-        fun showMessage(addFavResponse: AddFavResponse)
-        fun showAccountStates(states: AccountStateResponse)
+        fun markFavorite(addFavResponse: AddFavResponse)
+        fun showFavoriteState(state: Boolean)
     }
 
     interface Presenter {

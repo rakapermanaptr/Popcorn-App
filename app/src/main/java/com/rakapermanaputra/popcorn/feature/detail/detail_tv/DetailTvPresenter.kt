@@ -48,7 +48,7 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
                 }
 
                 override fun onNext(t: AddFavResponse) {
-                    view.showMessage(t)
+                    view.markFavorite(t)
                 }
 
                 override fun onError(t: Throwable?) {
@@ -70,7 +70,7 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
                 }
 
                 override fun onNext(t: AccountStateResponse) {
-                    view.showAccountStates(t)
+                    view.showFavoriteState(t.favorite)
                 }
 
                 override fun onError(t: Throwable?) {
