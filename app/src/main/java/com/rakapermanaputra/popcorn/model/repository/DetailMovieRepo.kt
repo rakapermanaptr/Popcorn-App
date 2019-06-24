@@ -2,7 +2,6 @@ package com.rakapermanaputra.popcorn.model.repository
 
 import com.rakapermanaputra.popcorn.model.*
 import io.reactivex.Flowable
-import io.reactivex.Observable
 
 interface DetailMovieRepo {
 
@@ -16,8 +15,10 @@ interface DetailMovieRepo {
 
     fun getReview(id: Int) : Flowable<ReviewResponse>
 
-    fun postFavMovie(accountId: Int, sessionId: String, reqFavBody: ReqFavBody) : Flowable<AddFavResponse>
+    fun postFavMovie(accountId: Int, sessionId: String, reqFavBody: ReqFavBody) : Flowable<AddResponse>
 
     fun getMovieState(moviedId: Int, sessionId: String): Flowable<AccountStateResponse>
+
+    fun postWatchlistMovie(accountId: Int, sessionId: String, reqWatchlistBody: ReqWatchlistBody): Flowable<AddResponse>
 
 }

@@ -12,5 +12,6 @@ interface HomeContract {
 
     interface Presenter {
         fun getAccountUser(sessionId: String)
+        fun onDestroy()
     }
 }

@@ -113,8 +113,8 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
         tvTitle.text = dataDetail.original_name
     }
 
-    override fun markFavorite(addFavResponse: AddFavResponse) {
-        Log.d("Data", "status favorite : " + addFavResponse.statusMessage)
+    override fun markFavorite(addResponse: AddResponse) {
+        Log.d("Data", "status favorite : " + addResponse.statusMessage)
 
     }
 

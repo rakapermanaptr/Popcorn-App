@@ -21,6 +21,7 @@ import com.rakapermanaputra.popcorn.feature.movies.MoviesFragment
 import com.rakapermanaputra.popcorn.feature.popular_people.PopularPeopleFragment
 import com.rakapermanaputra.popcorn.feature.search.SearchActivity
 import com.rakapermanaputra.popcorn.feature.tvshows.TvShowsFragment
+import com.rakapermanaputra.popcorn.feature.watchlist.WatchlistFragment
 import com.rakapermanaputra.popcorn.model.Account
 import com.rakapermanaputra.popcorn.model.RequestToken
 import com.rakapermanaputra.popcorn.model.repository.LoginRepoImpl
@@ -30,6 +31,11 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import android.app.Activity
+import android.os.Handler
+import android.os.Message
+import org.jetbrains.anko.act
+
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HomeContract.View {
 
@@ -45,6 +51,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var menuLogin: MenuItem
     private lateinit var menuLogout: MenuItem
     private lateinit var menuFavorite: MenuItem
+    private lateinit var menuWatchlist: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,11 +99,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             menuFavorite = menu.findItem(R.id.nav_favorite).setVisible(true)
 
+            menuWatchlist = menu.findItem(R.id.nav_watchlist).setVisible(true)
+
             menuLogout = menu.findItem(R.id.nav_logout).setVisible(true)
         } else{
             menuLogin = menu.findItem(R.id.nav_login).setVisible(true)
 
             menuFavorite = menu.findItem(R.id.nav_favorite).setVisible(false)
+
+            menuWatchlist = menu.findItem(R.id.nav_watchlist).setVisible(false)
 
             menuLogout = menu.findItem(R.id.nav_logout).setVisible(false)
         }
@@ -186,6 +197,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragment = FavoriteFragment()
                 toast("Favorite")
             }
+            R.id.nav_watchlist -> {
+                fragment = WatchlistFragment()
+                toast("Watchlist")
+            }
             R.id.nav_login -> {
                 startActivity<LoginActivity>()
             }
@@ -194,6 +209,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 tvUsername.text = ""
 
                 menuLogin = menu.findItem(R.id.nav_login).setVisible(true)
+                menuFavorite = menu.findItem(R.id.nav_watchlist).setVisible(false)
                 menuFavorite = menu.findItem(R.id.nav_favorite).setVisible(false)
                 menuLogout = menu.findItem(R.id.nav_logout).setVisible(false)
             }
@@ -205,5 +221,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
     }
 }

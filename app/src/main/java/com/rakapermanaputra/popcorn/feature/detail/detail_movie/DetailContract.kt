@@ -1,7 +1,6 @@
 package com.rakapermanaputra.popcorn.feature.detail.detail_movie
 
-import com.rakapermanaputra.popcorn.model.AccountStateResponse
-import com.rakapermanaputra.popcorn.model.AddFavResponse
+import com.rakapermanaputra.popcorn.model.AddResponse
 import com.rakapermanaputra.popcorn.model.DetailMovie
 import com.rakapermanaputra.popcorn.model.ReqFavBody
 
@@ -13,7 +12,7 @@ interface DetailContract {
         fun showDetail(detailMovie: DetailMovie)
         fun showLoading()
         fun hideLoading()
-        fun markFavorite(addFavResponse: AddFavResponse)
+        fun markFavorite(addResponse: AddResponse)
         fun showFavoriteState(state: Boolean)
     }
 

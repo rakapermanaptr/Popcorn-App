@@ -8,7 +8,7 @@ interface DetailTvContract {
         fun showLoading()
         fun hideLoading()
         fun showDetail(dataDetail: TvShowsDetail)
-        fun markFavorite(addFavResponse: AddFavResponse)
+        fun markFavorite(addResponse: AddResponse)
         fun showFavoriteState(state: Boolean)
     }
 

@@ -38,4 +38,8 @@ class HomePresenter(private val view: HomeContract.View,
             }))
     }
 
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+    }
+
 }

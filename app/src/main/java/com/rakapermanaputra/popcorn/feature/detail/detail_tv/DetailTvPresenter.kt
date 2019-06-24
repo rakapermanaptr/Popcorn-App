@@ -7,7 +7,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.ResourceSubscriber
-import java.util.*
 
 class DetailTvPresenter(private val view: DetailTvContract.View,
                         private val tvShowsRepoImpl: TvShowsRepoImpl)
@@ -42,12 +41,12 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
         compositeDisposable.add(tvShowsRepoImpl.postFavTv(accoundId, sessionId, reqFavBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribeWith(object : ResourceSubscriber<AddFavResponse>() {
+            .subscribeWith(object : ResourceSubscriber<AddResponse>() {
                 override fun onComplete() {
                     view.hideLoading()
                 }
 
-                override fun onNext(t: AddFavResponse) {
+                override fun onNext(t: AddResponse) {
                     view.markFavorite(t)
                 }
 

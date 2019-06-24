@@ -1,9 +1,6 @@
 package com.rakapermanaputra.popcorn.feature.detail.detail_movie
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,8 +13,7 @@ import com.rakapermanaputra.popcorn.db.SharedPreference
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.Info.InfoDetailFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.cast.CastMovieFragment
 import com.rakapermanaputra.popcorn.feature.detail.detail_movie.reviews.ReviewsMovieFragment
-import com.rakapermanaputra.popcorn.model.AccountStateResponse
-import com.rakapermanaputra.popcorn.model.AddFavResponse
+import com.rakapermanaputra.popcorn.model.AddResponse
 import com.rakapermanaputra.popcorn.model.DetailMovie
 import com.rakapermanaputra.popcorn.model.ReqFavBody
 import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
@@ -137,8 +133,8 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         }
     }
 
-    override fun markFavorite(addFavResponse: AddFavResponse) {
-        Log.d("Data", "status favorite : " + addFavResponse.statusMessage)
+    override fun markFavorite(addResponse: AddResponse) {
+        Log.d("Data", "status favorite : " + addResponse.statusMessage)
 
     }
 

@@ -2,7 +2,7 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_movie
 
 import android.util.Log
 import com.rakapermanaputra.popcorn.model.AccountStateResponse
-import com.rakapermanaputra.popcorn.model.AddFavResponse
+import com.rakapermanaputra.popcorn.model.AddResponse
 import com.rakapermanaputra.popcorn.model.DetailMovie
 import com.rakapermanaputra.popcorn.model.ReqFavBody
 import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
@@ -44,12 +44,12 @@ class DetailMoviePresenter(private val view: DetailContract.View,
         compositeDisposable.add(detailMovieRepoImpl.postFavMovie(accounId, sessionId, reqFavBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribeWith(object : ResourceSubscriber<AddFavResponse>() {
+            .subscribeWith(object : ResourceSubscriber<AddResponse>() {
                 override fun onComplete() {
                     view.hideLoading()
                 }
 
-                override fun onNext(t: AddFavResponse) {
+                override fun onNext(t: AddResponse) {
                     view.hideLoading()
                     view.markFavorite(t)
                 }
