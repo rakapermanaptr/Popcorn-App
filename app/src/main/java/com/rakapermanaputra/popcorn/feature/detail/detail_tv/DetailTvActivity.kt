@@ -67,20 +67,22 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
         if (sessionId != null) presenter.getTvState(id, sessionId!!)
 
         //fab listener
-        fab.setOnClickListener {
+        fabFavorite.setOnClickListener {
             if (accountId != 0) {
                 if (isFavorite == false) {
                     reqFavBody = ReqFavBody(true, id, "tv")
                     presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = true
                     it.snackbar("Added to favorite")
-                    fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+                    fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
+                    fabFavorite.colorPressed = resources.getColor(R.color.colorAccent)
                 } else {
                     reqFavBody = ReqFavBody(false, id, "tv")
                     presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = false
                     it.snackbar("Removed from favorite")
-                    fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
+                    fabFavorite.colorNormal = resources.getColor(R.color.colorWhite)
+                    fabFavorite.colorPressed = resources.getColor(R.color.colorWhite)
                 }
             } else {
                 it.snackbar("You must login first")
@@ -119,7 +121,7 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
     override fun showFavoriteState(state: Boolean) {
         isFavorite = state
 
-        if (isFavorite == true) fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+        if (isFavorite == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
 
         Log.d("Favorite", "favorite state : " + isFavorite)
     }

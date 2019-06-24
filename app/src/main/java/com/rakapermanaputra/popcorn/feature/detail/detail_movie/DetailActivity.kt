@@ -1,6 +1,9 @@
 package com.rakapermanaputra.popcorn.feature.detail.detail_movie
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,6 +41,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     private lateinit var reqFavBody: ReqFavBody
     private var isFavorite: Boolean = false
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -75,24 +79,30 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         if (sessionId != null) presenter.getMovieState(id, sessionId!!)
 
         //fab listener
-        fab.setOnClickListener {
+        fabFavorite.setOnClickListener {
             if (accountId != 0) {
                 if (isFavorite == false) {
                     reqFavBody = ReqFavBody(true, id, "movie")
                     presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = true
                     it.snackbar("Added to favorite")
-                    fab.setImageResource(R.drawable.ic_favorite_white_24dp)
+                    fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
+                    fabFavorite.colorPressed = resources.getColor(R.color.colorAccent)
                 } else {
                     reqFavBody = ReqFavBody(false, id, "movie")
                     presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = false
                     it.snackbar("Removed from favorite")
-                    fab.setImageResource(R.drawable.ic_favorite_border_white_24dp)
+                    fabFavorite.colorNormal = resources.getColor(R.color.colorWhite)
+                    fabFavorite.colorPressed = resources.getColor(R.color.colorWhite)
                 }
             } else {
                 it.snackbar("You must login first")
             }
+        }
+
+        fabWatchlist.setOnClickListener {
+            toast("watchlist")
         }
 
     }
@@ -132,11 +142,12 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun showFavoriteState(state: Boolean) {
         isFavorite = state
 
-        if (isFavorite == true) fab.setImageResource(R.drawable.ic_favorite_white_24dp)
-
+        if (isFavorite == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
+        
         Log.d("Favorite", "favorite state : " + isFavorite)
     }
 

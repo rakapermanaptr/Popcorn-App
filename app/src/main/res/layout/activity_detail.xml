@@ -121,80 +121,41 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:layout_below="@id/htab_appbar"
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/htab_appbar"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!--<LinearLayout-->
-        <!--android:layout_above="@id/fab"-->
-        <!--android:id="@+id/layoutFabFav"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="end|bottom"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@color/colorBlackOpp"-->
-            <!--android:padding="8dp"-->
-            <!--android:text="@string/favorite" />-->
-
-        <!--<android.support.design.widget.FloatingActionButton-->
-            <!--android:id="@+id/fabFav"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="16dp"-->
-            <!--android:src="@drawable/ic_favorite_white_24dp"-->
-            <!--app:backgroundTint="@color/colorPrimary"-->
-            <!--app:elevation="6dp"-->
-            <!--app:fabSize="mini" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_above="@id/layoutFabFav"-->
-        <!--android:id="@+id/layoutFabWatchlist"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@color/colorBlackOpp"-->
-            <!--android:padding="8dp"-->
-            <!--android:text="@string/watchlist" />-->
-
-        <!--<android.support.design.widget.FloatingActionButton-->
-            <!--android:id="@+id/fabWatchlist"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="16dp"-->
-            <!--android:src="@drawable/ic_watchlist_white_24dp"-->
-            <!--app:backgroundTint="@color/colorPrimary"-->
-            <!--app:elevation="6dp"-->
-            <!--app:fabSize="mini" />-->
-
-    <!--</LinearLayout>-->
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:onClick="fab"
-        android:src="@drawable/ic_favorite_border_white_24dp"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="6dp" />
+        app:fab_addButtonColorNormal="@color/colorPrimary"
+        app:fab_addButtonColorPressed="@color/colorPrimaryOpp"
+        app:fab_addButtonPlusIconColor="@color/colorWhite"
+        app:fab_labelStyle="@style/custom_fab">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_colorPressed="@color/colorWhite"
+            app:fab_icon="@drawable/ic_favorite_black_24dp"
+            app:fab_size="mini"
+            app:fab_title="@string/favorite" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabWatchlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_colorPressed="@color/colorWhite"
+            app:fab_icon="@drawable/ic_remove_red_eye_black_24dp"
+            app:fab_size="mini"
+            app:fab_title="@string/watchlist" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>

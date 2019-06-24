@@ -127,15 +127,34 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="6dp"
-        android:src="@drawable/ic_favorite_border_white_24dp"/>
+        android:layout_gravity="bottom|right"
+        app:fab_addButtonColorNormal="@color/colorPrimary"
+        app:fab_addButtonColorPressed="@color/colorPrimaryOpp"
+        app:fab_addButtonPlusIconColor="@color/colorWhite"
+        app:fab_labelStyle="@style/custom_fab">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_icon="@drawable/ic_favorite_black_24dp"
+            app:fab_size="mini"
+            app:fab_title="@string/favorite" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabWatchlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_icon="@drawable/ic_remove_red_eye_black_24dp"
+            app:fab_size="mini"
+            app:fab_title="@string/watchlist" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
 </android.support.design.widget.CoordinatorLayout>
