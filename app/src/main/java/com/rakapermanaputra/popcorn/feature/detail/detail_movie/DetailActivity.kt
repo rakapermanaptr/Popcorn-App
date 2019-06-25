@@ -16,6 +16,7 @@ import com.rakapermanaputra.popcorn.feature.detail.detail_movie.reviews.ReviewsM
 import com.rakapermanaputra.popcorn.model.AddResponse
 import com.rakapermanaputra.popcorn.model.DetailMovie
 import com.rakapermanaputra.popcorn.model.ReqFavBody
+import com.rakapermanaputra.popcorn.model.ReqWatchlistBody
 import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
@@ -35,9 +36,10 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     private var sessionId: String? = null
     private var accountId: Int? = null
     private lateinit var reqFavBody: ReqFavBody
+    private lateinit var reqWatchlistBody: ReqWatchlistBody
     private var isFavorite: Boolean = false
+    private var isWatchlist: Boolean = false
 
-    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -72,9 +74,11 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         val request = DetailMovieRepoImpl(service)
         presenter = DetailMoviePresenter(this, request)
         presenter.getDetail(id)
-        if (sessionId != null) presenter.getMovieState(id, sessionId!!)
+        if (sessionId != null) {
+            presenter.getMovieState(id, sessionId!!)
+        }
 
-        //fab listener
+        //fab favorite listener
         fabFavorite.setOnClickListener {
             if (accountId != 0) {
                 if (isFavorite == false) {
@@ -97,8 +101,27 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             }
         }
 
+        //fab watchlist
         fabWatchlist.setOnClickListener {
-            toast("watchlist")
+            if (accountId != 0) {
+                if (isWatchlist == false) {
+                    reqWatchlistBody = ReqWatchlistBody(id, "movie", true)
+                    presenter.postWatchlistMovie(accountId!!, sessionId!!, reqWatchlistBody)
+                    isWatchlist = true
+                    it.snackbar("Added to watchlist")
+                    fabWatchlist.colorNormal = resources.getColor(R.color.colorAccent)
+                    fabWatchlist.colorPressed = resources.getColor(R.color.colorAccent)
+                } else {
+                    reqWatchlistBody = ReqWatchlistBody(id, "movie", false)
+                    presenter.postWatchlistMovie(accountId!!, sessionId!!, reqWatchlistBody)
+                    isWatchlist = false
+                    it.snackbar("Removed from watchlist")
+                    fabWatchlist.colorNormal = resources.getColor(R.color.colorWhite)
+                    fabWatchlist.colorPressed = resources.getColor(R.color.colorWhite)
+                }
+            } else {
+                it.snackbar("You must login first")
+            }
         }
 
     }
@@ -138,7 +161,10 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
 
     }
 
-    @SuppressLint("ResourceAsColor")
+    override fun markWatchlist(addResponse: AddResponse) {
+        Log.d("Data", "status watchlist : " + addResponse.statusMessage)
+    }
+
     override fun showFavoriteState(state: Boolean) {
         isFavorite = state
 
@@ -146,6 +172,15 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         
         Log.d("Favorite", "favorite state : " + isFavorite)
     }
+
+    override fun showWatchlistState(state: Boolean) {
+        isWatchlist = state
+
+        if (isWatchlist == true) fabWatchlist.colorNormal = resources.getColor(R.color.colorAccent)
+
+        Log.d("Watchlist", "watchlist state : " + isWatchlist)
+    }
+
 
     override fun onResume() {
         super.onResume()

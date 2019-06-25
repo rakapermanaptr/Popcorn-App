@@ -1,10 +1,7 @@
 package com.rakapermanaputra.popcorn.feature.detail.detail_movie
 
 import android.util.Log
-import com.rakapermanaputra.popcorn.model.AccountStateResponse
-import com.rakapermanaputra.popcorn.model.AddResponse
-import com.rakapermanaputra.popcorn.model.DetailMovie
-import com.rakapermanaputra.popcorn.model.ReqFavBody
+import com.rakapermanaputra.popcorn.model.*
 import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -72,6 +69,7 @@ class DetailMoviePresenter(private val view: DetailContract.View,
 
                 override fun onNext(t: AccountStateResponse) {
                     view.showFavoriteState(t.favorite)
+                    view.showWatchlistState(t.watchlist)
                 }
 
                 override fun onError(t: Throwable?) {
@@ -81,6 +79,25 @@ class DetailMoviePresenter(private val view: DetailContract.View,
             }))
     }
 
+    override fun postWatchlistMovie(accounId: Int, sessionId: String, reqWatchlistBody: ReqWatchlistBody) {
+        compositeDisposable.add(detailMovieRepoImpl.postWatchlistMovie(accounId, sessionId, reqWatchlistBody)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribeWith(object : ResourceSubscriber<AddResponse>() {
+                override fun onComplete() {
+                    view.hideLoading()
+                }
+
+                override fun onNext(t: AddResponse) {
+                    view.markWatchlist(t)
+                }
+
+                override fun onError(t: Throwable) {
+                    view.hideLoading()
+                }
+
+            }))
+    }
 
     override fun onDestroy() {
         compositeDisposable.dispose()
