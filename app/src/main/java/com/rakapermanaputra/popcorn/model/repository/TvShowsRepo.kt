@@ -29,4 +29,9 @@ interface TvShowsRepo {
 
     fun getTvState(tvId: Int, sessionId: String): Flowable<AccountStateResponse>
 
+    fun getWatchlistTv(accountId: Int, sessionId: String): Flowable<TvShowsResponse>
+
+    fun postWatchlistTv(accountId: Int, sessionId: String, reqWatchlistBody: ReqWatchlistBody): Flowable<AddResponse>
+
+
 }

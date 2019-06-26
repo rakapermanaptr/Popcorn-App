@@ -15,14 +15,13 @@ interface DetailContract {
         fun hideLoading()
         fun markFavorite(addResponse: AddResponse)
         fun markWatchlist(addResponse: AddResponse)
-        fun showFavoriteState(state: Boolean)
-        fun showWatchlistState(state: Boolean)
+        fun showMovieState(stateFavorite: Boolean, stateWatchlist: Boolean)
     }
 
     interface Presenter {
         fun getDetail(id: Int)
-        fun postFavMovie(accounId: Int, sessionId: String, reqFavBody: ReqFavBody)
-        fun postWatchlistMovie(accounId: Int, sessionId: String, reqWatchlistBody: ReqWatchlistBody)
+        fun postFavorite(accounId: Int, sessionId: String, reqFavBody: ReqFavBody)
+        fun postWatchlist(accounId: Int, sessionId: String, reqWatchlistBody: ReqWatchlistBody)
         fun getMovieState(movieId: Int, sessionId: String)
         fun onDestroy()
     }

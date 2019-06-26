@@ -28,7 +28,9 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
     private var accountId: Int? = 0
     private var sessionId: String? = null
     private lateinit var reqFavBody: ReqFavBody
+    private lateinit var reqWatchlistBody: ReqWatchlistBody
     private var isFavorite: Boolean = false
+    private var isWatchlist: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,18 +73,41 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
             if (accountId != 0) {
                 if (isFavorite == false) {
                     reqFavBody = ReqFavBody(true, id, "tv")
-                    presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
+                    presenter.postFavorite(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = true
                     it.snackbar("Added to favorite")
                     fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
                     fabFavorite.colorPressed = resources.getColor(R.color.colorAccent)
                 } else {
                     reqFavBody = ReqFavBody(false, id, "tv")
-                    presenter.postFavTv(accountId!!, sessionId!!, reqFavBody)
+                    presenter.postFavorite(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = false
                     it.snackbar("Removed from favorite")
                     fabFavorite.colorNormal = resources.getColor(R.color.colorWhite)
                     fabFavorite.colorPressed = resources.getColor(R.color.colorWhite)
+                }
+            } else {
+                it.snackbar("You must login first")
+            }
+        }
+
+        //fab watchlist
+        fabWatchlist.setOnClickListener {
+            if (accountId != 0) {
+                if (isWatchlist == false) {
+                    reqWatchlistBody = ReqWatchlistBody(id, "tv", true)
+                    presenter.postWatchlist(accountId!!, sessionId!!, reqWatchlistBody)
+                    isWatchlist = true
+                    it.snackbar("Added to watchlist")
+                    fabWatchlist.colorNormal = resources.getColor(R.color.colorAccent)
+                    fabWatchlist.colorPressed = resources.getColor(R.color.colorAccent)
+                } else {
+                    reqWatchlistBody = ReqWatchlistBody(id, "tv", false)
+                    presenter.postWatchlist(accountId!!, sessionId!!, reqWatchlistBody)
+                    isWatchlist = false
+                    it.snackbar("Removed from watchlist")
+                    fabWatchlist.colorNormal = resources.getColor(R.color.colorWhite)
+                    fabWatchlist.colorPressed = resources.getColor(R.color.colorWhite)
                 }
             } else {
                 it.snackbar("You must login first")
@@ -118,13 +143,25 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
 
     }
 
-    override fun showFavoriteState(state: Boolean) {
-        isFavorite = state
+    override fun markWatchlist(addResponse: AddResponse) {
+        Log.d("Data", "status watchlist : " + addResponse.statusMessage)
+
+    }
+
+    override fun showTvState(stateFavorite: Boolean, stateWatchlist: Boolean) {
+        isFavorite = stateFavorite
 
         if (isFavorite == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
 
         Log.d("Favorite", "favorite state : " + isFavorite)
+
+        isWatchlist = stateWatchlist
+
+        if (isWatchlist == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
+
+        Log.d("Favorite", "watchlist state : " + isFavorite)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

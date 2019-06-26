@@ -5,6 +5,14 @@ import com.rakapermanaputra.popcorn.network.ApiRest
 import io.reactivex.Flowable
 
 class TvShowsRepoImpl(private val apiRest: ApiRest) : TvShowsRepo {
+    override fun postWatchlistTv(
+        accountId: Int,
+        sessionId: String,
+        reqWatchlistBody: ReqWatchlistBody
+    ): Flowable<AddResponse> = apiRest.postWatchlist(accountId, sessionId, reqWatchlistBody)
+
+    override fun getWatchlistTv(accountId: Int, sessionId: String): Flowable<TvShowsResponse> = apiRest.getWatchlistTv(accountId, sessionId)
+
     override fun getTvState(tvId: Int, sessionId: String): Flowable<AccountStateResponse> = apiRest.getTvState(tvId, sessionId)
     override fun getFavTv(accountId: Int, sessionId: String): Flowable<TvShowsResponse> = apiRest.getFavoriteTv(accountId, sessionId)
     override fun postFavTv(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody) = apiRest.postFavorite(accoundId, sessionId, reqFavBody)

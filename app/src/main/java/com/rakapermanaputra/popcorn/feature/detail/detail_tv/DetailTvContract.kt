@@ -9,12 +9,14 @@ interface DetailTvContract {
         fun hideLoading()
         fun showDetail(dataDetail: TvShowsDetail)
         fun markFavorite(addResponse: AddResponse)
-        fun showFavoriteState(state: Boolean)
+        fun markWatchlist(addResponse: AddResponse)
+        fun showTvState(stateFavorite: Boolean, stateWatchlist: Boolean)
     }
 
     interface Presenter {
         fun getDetail(id: Int)
-        fun postFavTv(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody)
+        fun postFavorite(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody)
+        fun postWatchlist(accounId: Int, sessionId: String, reqWatchlistBody: ReqWatchlistBody)
         fun getTvState(tvId: Int, sessionId: String)
         fun onDestroy()
     }

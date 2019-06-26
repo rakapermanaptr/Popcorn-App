@@ -131,5 +131,15 @@ interface ApiRest {
         @Body reqWatchlistBody: ReqWatchlistBody
     ): Flowable<AddResponse>
 
+    @GET("account/{account_id}/watchlist/movies" + BuildConfig.API_KEY)
+    fun getWatchlistMovies(
+        @Path("account_id") accountId: Int,
+        @Query("session_id") sessionId: String
+    ): Flowable<MoviesResponse>
 
+    @GET("account/{account_id}/watchlist/tv" + BuildConfig.API_KEY)
+    fun getWatchlistTv(
+        @Path("account_id") accountId: Int,
+        @Query("session_id") sessionId: String
+    ): Flowable<TvShowsResponse>
 }

@@ -83,14 +83,14 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             if (accountId != 0) {
                 if (isFavorite == false) {
                     reqFavBody = ReqFavBody(true, id, "movie")
-                    presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
+                    presenter.postFavorite(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = true
                     it.snackbar("Added to favorite")
                     fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
                     fabFavorite.colorPressed = resources.getColor(R.color.colorAccent)
                 } else {
                     reqFavBody = ReqFavBody(false, id, "movie")
-                    presenter.postFavMovie(accountId!!, sessionId!!, reqFavBody)
+                    presenter.postFavorite(accountId!!, sessionId!!, reqFavBody)
                     isFavorite = false
                     it.snackbar("Removed from favorite")
                     fabFavorite.colorNormal = resources.getColor(R.color.colorWhite)
@@ -101,19 +101,19 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             }
         }
 
-        //fab watchlist
+        //fab watchlist listener
         fabWatchlist.setOnClickListener {
             if (accountId != 0) {
                 if (isWatchlist == false) {
-                    reqWatchlistBody = ReqWatchlistBody(id, "movie", true)
-                    presenter.postWatchlistMovie(accountId!!, sessionId!!, reqWatchlistBody)
+                    reqWatchlistBody = ReqWatchlistBody(id, "tv", true)
+                    presenter.postWatchlist(accountId!!, sessionId!!, reqWatchlistBody)
                     isWatchlist = true
                     it.snackbar("Added to watchlist")
                     fabWatchlist.colorNormal = resources.getColor(R.color.colorAccent)
                     fabWatchlist.colorPressed = resources.getColor(R.color.colorAccent)
                 } else {
-                    reqWatchlistBody = ReqWatchlistBody(id, "movie", false)
-                    presenter.postWatchlistMovie(accountId!!, sessionId!!, reqWatchlistBody)
+                    reqWatchlistBody = ReqWatchlistBody(id, "tv", false)
+                    presenter.postWatchlist(accountId!!, sessionId!!, reqWatchlistBody)
                     isWatchlist = false
                     it.snackbar("Removed from watchlist")
                     fabWatchlist.colorNormal = resources.getColor(R.color.colorWhite)
@@ -165,26 +165,18 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         Log.d("Data", "status watchlist : " + addResponse.statusMessage)
     }
 
-    override fun showFavoriteState(state: Boolean) {
-        isFavorite = state
+    override fun showMovieState(stateFavorite: Boolean, stateWatchlist: Boolean) {
+        isFavorite = stateFavorite
 
         if (isFavorite == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
-        
-        Log.d("Favorite", "favorite state : " + isFavorite)
-    }
 
-    override fun showWatchlistState(state: Boolean) {
-        isWatchlist = state
+        Log.d("Favorite", "favorite state : " + isFavorite)
+
+        isWatchlist = stateWatchlist
 
         if (isWatchlist == true) fabWatchlist.colorNormal = resources.getColor(R.color.colorAccent)
 
         Log.d("Watchlist", "watchlist state : " + isWatchlist)
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        Log.i("Data", "State movie : resume")
     }
 
     override fun onDestroy() {

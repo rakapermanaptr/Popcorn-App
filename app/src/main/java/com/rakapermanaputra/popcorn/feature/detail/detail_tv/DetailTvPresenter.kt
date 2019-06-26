@@ -37,7 +37,7 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
             }))
     }
 
-    override fun postFavTv(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody) {
+    override fun postFavorite(accoundId: Int, sessionId: String, reqFavBody: ReqFavBody) {
         compositeDisposable.add(tvShowsRepoImpl.postFavTv(accoundId, sessionId, reqFavBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -58,6 +58,26 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
             }))
     }
 
+    override fun postWatchlist(accounId: Int, sessionId: String, reqWatchlistBody: ReqWatchlistBody) {
+        compositeDisposable.add(tvShowsRepoImpl.postWatchlistTv(accounId, sessionId, reqWatchlistBody)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribeWith(object : ResourceSubscriber<AddResponse>() {
+                override fun onComplete() {
+                    view.hideLoading()
+                }
+
+                override fun onNext(t: AddResponse) {
+                    view.markWatchlist(t)
+                }
+
+                override fun onError(t: Throwable) {
+                    view.hideLoading()
+                }
+
+            }))
+    }
+
     override fun getTvState(tvId: Int, sessionId: String) {
         view.showLoading()
         compositeDisposable.add(tvShowsRepoImpl.getTvState(tvId, sessionId)
@@ -69,7 +89,7 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
                 }
 
                 override fun onNext(t: AccountStateResponse) {
-                    view.showFavoriteState(t.favorite)
+                    view.showTvState(t.favorite, t.watchlist)
                 }
 
                 override fun onError(t: Throwable?) {
@@ -79,7 +99,6 @@ class DetailTvPresenter(private val view: DetailTvContract.View,
 
             }))
     }
-
 
     override fun onDestroy() {
         compositeDisposable.dispose()
