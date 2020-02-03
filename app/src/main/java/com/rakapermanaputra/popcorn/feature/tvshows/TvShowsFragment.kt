@@ -30,8 +30,7 @@ class TvShowsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val adapter = ViewPagerAdapter(childFragmentManager)
-        val tvshowsAiringTodayFragment =
-            TvshowsAiringTodayFragment()
+        val tvshowsAiringTodayFragment = TvshowsAiringTodayFragment()
         val tvshowsOnTheAirFragment = TvshowsOnTheAirFragment()
         val tvshowsPopularFragment = TvshowsPopularFragment()
         val tvshowsTopRatedFragment = TvshowsTopRatedFragment()
@@ -42,6 +41,7 @@ class TvShowsFragment : Fragment() {
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
 
+        
     }
 
     override fun onCreateView(

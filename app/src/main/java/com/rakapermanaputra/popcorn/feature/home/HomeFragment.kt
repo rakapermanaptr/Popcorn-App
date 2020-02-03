@@ -20,18 +20,10 @@ import com.rakapermanaputra.popcorn.model.repository.TvShowsRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.jetbrains.anko.padding
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class HomeFragment : Fragment(), HomeFragmentContract.View {
 
     private var nowPlayingMovies: MutableList<Movies> = mutableListOf()
@@ -56,17 +48,14 @@ class HomeFragment : Fragment(), HomeFragmentContract.View {
 
         //onclick-more
         ic_more_popular_movie.setOnClickListener {
-            toast("on clicked popular movie")
             startActivity<MorePopularActivity>()
         }
 
         ic_more_popular_tv.setOnClickListener {
-            toast("on clicked popular tv")
             startActivity<MorePopularTvActivity>()
         }
 
         ic_more_discover_movie.setOnClickListener {
-            toast("on clicked discover movie")
             startActivity<MoreDiscoverActivity>()
         }
 
@@ -75,9 +64,11 @@ class HomeFragment : Fragment(), HomeFragmentContract.View {
     override fun showNowPlayingMovies(npMovies: List<Movies>) {
         nowPlayingMovies.clear()
         nowPlayingMovies.addAll(npMovies)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false)
-        rvNowPlaying.layoutManager = linearLayoutManager
-        rvNowPlaying.adapter = HomeNowPlayingAdapter(requireContext(), nowPlayingMovies)
+        val bannerAdapter = BannerAdapter(requireContext(), nowPlayingMovies)
+        viewPagerBanner.clipToPadding = false
+        viewPagerBanner.padding = 16
+        viewPagerBanner.pageMargin = 8
+        viewPagerBanner.adapter = bannerAdapter
     }
 
     override fun showPopularMovies(popularMovies: List<Movies>) {
