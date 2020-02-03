@@ -7,9 +7,6 @@ import retrofit2.http.*
 
 interface ApiRest {
 
-//    @GET("movie/now_playing" + BuildConfig.API_KEY)
-//    fun getNowPlayingMovies(@Query("page")page: Int) : Flowable<MoviesResponse>
-
     @GET("movie/now_playing" + BuildConfig.API_KEY)
     fun getNowPlayingMovies(): Flowable<MoviesResponse>
 

@@ -21,15 +21,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_fav_tv.*
 import org.jetbrains.anko.support.v4.toast
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class FavTvFragment : Fragment(), FavTvContract.View {
 
     private lateinit var presenter: FavTvPresenter
@@ -49,7 +41,7 @@ class FavTvFragment : Fragment(), FavTvContract.View {
         val service = ApiService.getClient().create(ApiRest::class.java)
         val request = TvShowsRepoImpl(service)
         presenter = FavTvPresenter(this, request)
-        presenter.getFavoriteTv(accountId, sessionId!!)
+        presenter.getFavoriteTv(accountId, sessionId)
 
     }
 
@@ -77,7 +69,7 @@ class FavTvFragment : Fragment(), FavTvContract.View {
 
     override fun onResume() {
         super.onResume()
-        presenter.getFavoriteTv(accountId, sessionId!!)
+        presenter.getFavoriteTv(accountId, sessionId)
     }
 
     override fun onCreateView(

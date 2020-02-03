@@ -19,15 +19,6 @@ import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_cast_detail.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class CastMovieFragment : Fragment(), CastMovieContract.View {
 
     private var casterMovie: MutableList<Cast> = mutableListOf()

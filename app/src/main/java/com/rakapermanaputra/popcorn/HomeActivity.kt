@@ -31,10 +31,6 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
-import android.app.Activity
-import android.os.Handler
-import android.os.Message
-import org.jetbrains.anko.act
 
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HomeContract.View {
@@ -67,7 +63,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
-            var fragment: Fragment = HomeFragment()
+            val fragment: Fragment = HomeFragment()
             supportFragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
         }
 
@@ -75,11 +71,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         sharedPreference = SharedPreference(this)
         val token = sharedPreference.getValueString("TOKEN")
         requestToken = RequestToken(token)
-        Log.d("Data", "token on sharedPref: " + token)
+        Log.d("Data", "token on sharedPref: $token")
 
         //SharedPref Session
         sessionId = sharedPreference.getValueString("SESSION_ID")
-        Log.d("Data", "sessionId on sharedPref: " + sessionId)
+        Log.d("Data", "sessionId on sharedPref: $sessionId")
 
         //Request
         val service = ApiService.getClient().create(ApiRest::class.java)
@@ -90,7 +86,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Display username on NavHeader
         navigationView = findViewById(R.id.nav_view)
         headerView = navigationView.getHeaderView(0)
-        tvUsername = headerView.findViewById<TextView>(R.id.tvUsername)
+        tvUsername = headerView.findViewById(R.id.tvUsername)
 
         //Setting Menu
         menu = navigationView.menu
@@ -118,7 +114,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val userId = userAccount.id
         sharedPreference.saveInt("ACCOUNT_ID", userId)
         toast("Hello, " + userAccount.username)
-        Log.i("Data", "User id: " + userId)
+        Log.i("Data", "User id: $userId")
 
         //show username on NavHeader
         tvUsername.text = userAccount.username
@@ -160,9 +156,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_search -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_search -> true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

@@ -20,15 +20,7 @@ import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_seasons.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class SeasonsTvFragment : Fragment(), SeasonsTvContract.View {
 
     private lateinit var presenter: SeasonsTvPresenter
@@ -45,7 +37,7 @@ class SeasonsTvFragment : Fragment(), SeasonsTvContract.View {
         presenter.getTvSeasons(id)
 
 
-        Log.i("Data", "id seasons : " + id)
+        Log.i("Data", "id seasons : $id")
     }
 
     override fun showSeasons(season: List<Season>) {

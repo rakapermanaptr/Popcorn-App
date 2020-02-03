@@ -14,30 +14,6 @@ class MoviesNowPlayingPresenter(private val view: MoviesNowPlayingContract.View,
 
     val compositeDisposable = CompositeDisposable()
 
-//    override fun getNowPlaying(page: Int) {
-//        view.showLoading()
-//        compositeDisposable.add(moviesRepoImpl.getNowPlaying(page)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeWith(object : ResourceSubscriber<MoviesResponse>(){
-//                override fun onComplete() {
-//                    view.hideLoading()
-//                }
-//
-//                override fun onNext(t: MoviesResponse) {
-//                    view.showNowPlaying(t.results)
-//                }
-//
-//                override fun onError(t: Throwable?) {
-//                    view.hideLoading()
-//                    view.showNowPlaying(Collections.emptyList())
-//                }
-//
-//            })
-//        )
-//    }
-
-
     override fun getNowPlaying() {
         view.showLoading()
         compositeDisposable.add(moviesRepoImpl.getNowPlaying()

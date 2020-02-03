@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.TvCreditsAdapter
 import com.rakapermanaputra.popcorn.model.Credits
-import com.rakapermanaputra.popcorn.model.repository.TvShowsRepo
 import com.rakapermanaputra.popcorn.model.repository.TvShowsRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
@@ -20,15 +19,7 @@ import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_tvshows_people.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class TvshowsPeopleFragment : Fragment(), TvCreditsContract.View {
 
     private lateinit var presenter: TvCreditsPresenter

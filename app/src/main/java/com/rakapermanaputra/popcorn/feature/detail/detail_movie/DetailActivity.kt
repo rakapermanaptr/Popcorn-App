@@ -45,8 +45,8 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         setContentView(R.layout.activity_detail)
 
         sharedPreference = SharedPreference(this)
-        sessionId = sharedPreference?.getValueString("SESSION_ID")
-        accountId = sharedPreference?.getValueInt("ACCOUNT_ID")
+        sessionId = sharedPreference.getValueString("SESSION_ID")
+        accountId = sharedPreference.getValueInt("ACCOUNT_ID")
 
         id = intent.getIntExtra("id", 0)
         val bundle = Bundle()
@@ -168,15 +168,15 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     override fun showMovieState(stateFavorite: Boolean, stateWatchlist: Boolean) {
         isFavorite = stateFavorite
 
-        if (isFavorite == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
+        if (isFavorite) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
 
-        Log.d("Favorite", "favorite state : " + isFavorite)
+        Log.d("Favorite", "favorite state : $isFavorite")
 
         isWatchlist = stateWatchlist
 
-        if (isWatchlist == true) fabWatchlist.colorNormal = resources.getColor(R.color.colorAccent)
+        if (isWatchlist) fabWatchlist.colorNormal = resources.getColor(R.color.colorAccent)
 
-        Log.d("Watchlist", "watchlist state : " + isWatchlist)
+        Log.d("Watchlist", "watchlist state : $isWatchlist")
     }
 
     override fun onDestroy() {

@@ -2,6 +2,7 @@ package com.rakapermanaputra.popcorn.feature.home
 
 import android.content.Context
 import android.support.v4.view.PagerAdapter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,6 @@ import com.rakapermanaputra.popcorn.model.Movies
 import java.lang.Exception
 
 class BannerAdapter(private val context: Context, private var bannerList: List<Movies>): PagerAdapter() {
-
-    fun setBannerList(list: List<Movies>) {
-        bannerList = list
-        notifyDataSetChanged()
-    }
 
     override fun isViewFromObject(view: View, o: Any): Boolean = view == o
 
@@ -36,7 +32,9 @@ class BannerAdapter(private val context: Context, private var bannerList: List<M
 
             container.addView(view)
             return view
-        } catch (e: Exception) { }
+        } catch (e: Exception) {
+            Log.e("BannerAdapterErr", e.localizedMessage)
+        }
         return container
     }
 

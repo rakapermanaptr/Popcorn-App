@@ -13,7 +13,6 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_more_popular.*
-import org.jetbrains.anko.act
 
 class MorePopularActivity : AppCompatActivity(),
     MoreMovieContract.View {

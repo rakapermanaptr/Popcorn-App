@@ -16,7 +16,6 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.share
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -80,7 +79,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     override fun showSessionId(session: Session) {
         sessionId = session.sessionId
         sharedPreference.save("SESSION_ID", sessionId)
-        Log.d("Data", "Session id from LoginAct: " + sessionId)
+        Log.d("Data", "Session id from LoginAct: $sessionId")
 
         startActivity<HomeActivity>()
     }

@@ -9,22 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.rakapermanaputra.popcorn.R
-import com.rakapermanaputra.popcorn.model.CreatedBy
 import com.rakapermanaputra.popcorn.model.TvShowsDetail
 import com.rakapermanaputra.popcorn.model.repository.TvShowsRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
 import kotlinx.android.synthetic.main.fragment_info.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class InfoDetailTvFragment : Fragment(), InfoDetailTvContract.View {
 
     private lateinit var presenter: InfoDetailPresenter
@@ -52,7 +43,7 @@ class InfoDetailTvFragment : Fragment(), InfoDetailTvContract.View {
         tvFirstAirDate.text = dataDetail.first_air_date
         tvLastAirDate.text = dataDetail.last_air_date
         for (creator in dataDetail.created_by) {
-            tvCreatedBy.append("${creator.name}")
+            tvCreatedBy.append(creator.name)
         }
         tvHomePage.text = dataDetail.homepage
     }

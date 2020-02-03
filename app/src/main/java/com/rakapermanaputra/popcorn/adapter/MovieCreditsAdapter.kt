@@ -38,7 +38,7 @@ class MovieCreditsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             .load("http://image.tmdb.org/t/p/w185" + movieCredits.poster_path)
             .into(imgPoster)
 
-        itemView.tvReleaseDate.text = movieCredits.release_date?.substring(0, 4)
+        itemView.tvReleaseDate.text = movieCredits.release_date.substring(0, 4)
 
         if (movieCredits.character.isEmpty()) {
             itemView.tvActors.text = "-"

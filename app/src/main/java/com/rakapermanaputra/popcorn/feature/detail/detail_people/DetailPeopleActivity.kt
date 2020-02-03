@@ -17,7 +17,6 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.activity_detail_people.*
-import kotlinx.android.synthetic.main.fragment_info_people.*
 
 class DetailPeopleActivity : AppCompatActivity(), DetailPeopleContract.View {
 
@@ -29,7 +28,7 @@ class DetailPeopleActivity : AppCompatActivity(), DetailPeopleContract.View {
 
         val id = intent.getIntExtra("id", 0)
 
-        Log.d("data", "id : " + id)
+        Log.d("data", "id : $id")
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""

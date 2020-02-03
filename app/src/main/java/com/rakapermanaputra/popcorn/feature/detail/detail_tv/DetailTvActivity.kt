@@ -37,8 +37,8 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
         setContentView(R.layout.activity_detail_tv)
 
         sharedPreference = SharedPreference(this)
-        accountId = sharedPreference?.getValueInt("ACCOUNT_ID")
-        sessionId = sharedPreference?.getValueString("SESSION_ID")
+        accountId = sharedPreference.getValueInt("ACCOUNT_ID")
+        sessionId = sharedPreference.getValueString("SESSION_ID")
 
         val id = intent.getIntExtra("id", 0)
         val bundle = Bundle()
@@ -151,15 +151,15 @@ class DetailTvActivity : AppCompatActivity(), DetailTvContract.View {
     override fun showTvState(stateFavorite: Boolean, stateWatchlist: Boolean) {
         isFavorite = stateFavorite
 
-        if (isFavorite == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
+        if (isFavorite) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
 
-        Log.d("Favorite", "favorite state : " + isFavorite)
+        Log.d("Favorite", "favorite state : $isFavorite")
 
         isWatchlist = stateWatchlist
 
-        if (isWatchlist == true) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
+        if (isWatchlist) fabFavorite.colorNormal = resources.getColor(R.color.colorAccent)
 
-        Log.d("Favorite", "watchlist state : " + isFavorite)
+        Log.d("Favorite", "watchlist state : $isFavorite")
     }
 
 

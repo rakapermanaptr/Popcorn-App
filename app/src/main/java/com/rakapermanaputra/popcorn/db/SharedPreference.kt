@@ -10,13 +10,13 @@ class SharedPreference(val context: Context) {
     fun save(KEY_NAME: String, value: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putString(KEY_NAME, value)
-        editor!!.commit()
+        editor.commit()
     }
 
     fun saveInt(KEY_NAME: String, value: Int) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putInt(KEY_NAME, value)
-        editor!!.commit()
+        editor.commit()
     }
 
     fun getValueString(KEY_NAME: String): String? {

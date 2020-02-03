@@ -13,7 +13,6 @@ import android.widget.LinearLayout
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.CasterAdapter
 import com.rakapermanaputra.popcorn.model.Cast
-import com.rakapermanaputra.popcorn.model.repository.DetailMovieRepoImpl
 import com.rakapermanaputra.popcorn.model.repository.TvShowsRepoImpl
 import com.rakapermanaputra.popcorn.network.ApiRest
 import com.rakapermanaputra.popcorn.network.ApiService
@@ -21,15 +20,7 @@ import com.rakapermanaputra.popcorn.utils.invisible
 import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_actors.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class ActorsTvFragment : Fragment(), ActorsTvContract.View {
 
     private lateinit var presenter: ActorsTvPresenter

@@ -2,7 +2,6 @@ package com.rakapermanaputra.popcorn.feature.home
 
 import android.util.Log
 import com.rakapermanaputra.popcorn.model.*
-import com.rakapermanaputra.popcorn.model.repository.LoginRepoImpl
 import com.rakapermanaputra.popcorn.model.repository.MoviesRepoImpl
 import com.rakapermanaputra.popcorn.model.repository.TvShowsRepoImpl
 import io.reactivex.android.schedulers.AndroidSchedulers

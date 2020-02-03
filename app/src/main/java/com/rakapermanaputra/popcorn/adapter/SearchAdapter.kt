@@ -44,7 +44,7 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         if (search.mediaType == "tv") {
             itemView.tvTitle.text = search.name
             if (search.firstAirDate == "") itemView.tvReleaseDate.text = "-"
-            else itemView.tvReleaseDate.text = search.firstAirDate?.substring(0, 4)
+            else itemView.tvReleaseDate.text = search.firstAirDate.substring(0, 4)
             itemView.tvRate.text = search.voteAverage.toString()
 
             itemView.setOnClickListener {
@@ -52,7 +52,7 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             }
         } else {
             itemView.tvTitle.text = search.title
-            itemView.tvReleaseDate.text = search.release_date?.substring(0, 4)
+            itemView.tvReleaseDate.text = search.release_date.substring(0, 4)
             itemView.tvRate.text = search.voteAverage.toString()
 
             itemView.setOnClickListener {

@@ -42,7 +42,7 @@ class TvSeasonsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         Glide.with(itemView)
             .load("http://image.tmdb.org/t/p/w185" + season.poster_path)
             .into(imgPoster)
-        itemView.tvReleaseDate.text = season.air_date?.substring(0, 4)
+        itemView.tvReleaseDate.text = season.air_date.substring(0, 4)
         itemView.tvTitle.text = season.name
 
         itemView.setOnClickListener {
