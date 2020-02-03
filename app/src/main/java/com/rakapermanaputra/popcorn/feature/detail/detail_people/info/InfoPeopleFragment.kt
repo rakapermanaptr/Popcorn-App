@@ -47,10 +47,15 @@ class InfoPeopleFragment : Fragment(), InfoPeopleContract.View {
             tvHomepage.text = detail.homepage
         }
 
-        val age = 2019 - (detail.birthday.substring(0, 4).toInt())
-        tvAge.text = age.toString()
+        if (detail.birthday == null) {
+            tvAge.text = "N/A"
+        } else {
+            val age = 2019 - (detail.birthday?.substring(0, 4)?.toInt()!!)
+            tvAge.text = age.toString()
+        }
 
-        for (knownAs in detail.also_known_as) {
+
+        for (knownAs in detail.also_known_as!!) {
             tvKnownAs.append("${knownAs}, ")
         }
 
