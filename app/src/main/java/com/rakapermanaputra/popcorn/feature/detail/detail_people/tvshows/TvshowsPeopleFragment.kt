@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.TvCreditsAdapter
@@ -51,9 +52,9 @@ class TvshowsPeopleFragment : androidx.fragment.app.Fragment(), TvCreditsContrac
         tvshowsCredits.clear()
         tvshowsCredits.addAll(tvCredits)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                LinearLayout.VERTICAL,
+                RecyclerView.VERTICAL,
                 false
             )
         recyclerView.layoutManager = linearLayoutManager

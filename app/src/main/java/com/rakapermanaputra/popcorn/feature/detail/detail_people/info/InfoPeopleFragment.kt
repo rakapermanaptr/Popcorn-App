@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.ImagesPeopleAdapter
@@ -65,9 +66,9 @@ class InfoPeopleFragment : androidx.fragment.app.Fragment(), InfoPeopleContract.
         imagesPeople.clear()
         imagesPeople.addAll(images)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                LinearLayout.HORIZONTAL,
+                RecyclerView.HORIZONTAL,
                 false
             )
         recyclerView.layoutManager = linearLayoutManager

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.MoviesAdapter
 import com.rakapermanaputra.popcorn.model.Movies
@@ -46,9 +47,9 @@ class MoreDiscoverActivity : AppCompatActivity(), MoreDiscoverContract.View {
         moreDiscoverMovies.clear()
         moreDiscoverMovies.addAll(moreDiscover)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 applicationContext,
-                LinearLayout.VERTICAL,
+                RecyclerView.VERTICAL,
                 false
             )
         recyclerView.layoutManager = linearLayoutManager

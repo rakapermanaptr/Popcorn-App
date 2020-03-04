@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.MoviesAdapter
@@ -59,9 +60,9 @@ class FavMoviesFragment : androidx.fragment.app.Fragment(), FavMoviesContract.Vi
         if (movies != null) {
             favMovies.addAll(movies)
             val linearLayoutManager =
-                androidx.recyclerview.widget.LinearLayoutManager(
+                LinearLayoutManager(
                     activity,
-                    LinearLayout.VERTICAL,
+                    RecyclerView.VERTICAL,
                     false
                 )
             recyclerView.layoutManager = linearLayoutManager

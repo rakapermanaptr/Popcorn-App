@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.widget.LinearLayout
 import android.widget.SearchView
+import androidx.recyclerview.widget.RecyclerView
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.SearchAdapter
 import com.rakapermanaputra.popcorn.model.Search
@@ -47,9 +48,9 @@ class SearchActivity : AppCompatActivity(), SearchContract.View {
         results.clear()
         results.addAll(listResult)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 this,
-                LinearLayout.VERTICAL,
+                RecyclerView.VERTICAL,
                 false
             )
         recyclerView.layoutManager = linearLayoutManager

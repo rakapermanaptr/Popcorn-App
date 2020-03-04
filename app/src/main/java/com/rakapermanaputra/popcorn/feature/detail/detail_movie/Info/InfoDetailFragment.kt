@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.RecommendationAdapter
@@ -62,9 +63,9 @@ class InfoDetailFragment : androidx.fragment.app.Fragment(), InfoDetailContract.
         similarMovies.clear()
         similarMovies.addAll(similar)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                LinearLayout.HORIZONTAL,
+                RecyclerView.HORIZONTAL,
                 false
             )
         rvSimilar.layoutManager = linearLayoutManager
@@ -75,9 +76,9 @@ class InfoDetailFragment : androidx.fragment.app.Fragment(), InfoDetailContract.
         recommendationMovie.clear()
         recommendationMovie.addAll(recommend)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                LinearLayoutManager.HORIZONTAL,
                 false
             )
         rvRecommendation.layoutManager = linearLayoutManager

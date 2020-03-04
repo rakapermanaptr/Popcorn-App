@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.CasterAdapter
@@ -49,9 +50,9 @@ class CastMovieFragment : androidx.fragment.app.Fragment(), CastMovieContract.Vi
         casterMovie.clear()
         casterMovie.addAll(caster)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                LinearLayout.VERTICAL,
+                RecyclerView.VERTICAL,
                 false
             )
         recyclerView.layoutManager = linearLayoutManager

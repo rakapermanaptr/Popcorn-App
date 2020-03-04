@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.rakapermanaputra.popcorn.feature.home.morepopular_movie.MorePopularActivity
 
 import com.rakapermanaputra.popcorn.R
@@ -75,9 +76,9 @@ class HomeFragment : androidx.fragment.app.Fragment(), HomeFragmentContract.View
         popularMovie.clear()
         popularMovie.addAll(popularMovies)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                LinearLayout.HORIZONTAL,
+                RecyclerView.HORIZONTAL,
                 false
             )
         rvPopularMovie.layoutManager = linearLayoutManager
@@ -88,9 +89,9 @@ class HomeFragment : androidx.fragment.app.Fragment(), HomeFragmentContract.View
         popularTv.clear()
         popularTv.addAll(popularTvs)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                LinearLayout.HORIZONTAL,
+                RecyclerView.HORIZONTAL,
                 false
             )
         rvPopularTv.layoutManager = linearLayoutManager
@@ -101,9 +102,9 @@ class HomeFragment : androidx.fragment.app.Fragment(), HomeFragmentContract.View
         discoverMovie.clear()
         discoverMovie.addAll(discoverMovies)
         val linearLayoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(
+            LinearLayoutManager(
                 activity,
-                LinearLayout.HORIZONTAL,
+                RecyclerView.HORIZONTAL,
                 false
             )
         rvDiscoverMovie.layoutManager = linearLayoutManager
