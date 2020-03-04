@@ -50,7 +50,7 @@ class InfoPeopleFragment : Fragment(), InfoPeopleContract.View {
         if (detail.birthday == null) {
             tvAge.text = "N/A"
         } else {
-            val age = 2019 - (detail.birthday?.substring(0, 4)?.toInt()!!)
+            val age = 2019 - (detail.birthday.substring(0, 4).toInt())
             tvAge.text = age.toString()
         }
 

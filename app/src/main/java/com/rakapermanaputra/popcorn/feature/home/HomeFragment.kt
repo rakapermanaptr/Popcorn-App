@@ -67,7 +67,7 @@ class HomeFragment : Fragment(), HomeFragmentContract.View {
         val bannerAdapter = BannerAdapter(requireContext(), nowPlayingMovies)
         viewPagerBanner.clipToPadding = false
         viewPagerBanner.padding = 16
-        viewPagerBanner.pageMargin = 8
+        viewPagerBanner.pageMargin = 16
         viewPagerBanner.adapter = bannerAdapter
     }
 
