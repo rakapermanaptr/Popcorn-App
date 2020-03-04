@@ -2,7 +2,7 @@ package com.rakapermanaputra.popcorn.feature.favorite
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.rakapermanaputra.popcorn.feature.favorite.tv.FavTvFragment
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : androidx.fragment.app.Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

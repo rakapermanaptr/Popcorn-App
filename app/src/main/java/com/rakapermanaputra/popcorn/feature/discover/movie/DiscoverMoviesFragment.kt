@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.discover.movie
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_discover_movie.*
 
 
-class DiscoverMoviesFragment : Fragment(), DiscoverMoviesContract.View {
+class DiscoverMoviesFragment : androidx.fragment.app.Fragment(), DiscoverMoviesContract.View {
 
     private lateinit var presenter: DiscoverMoviesPresenter
     private val discoverMovies: MutableList<Movies> = mutableListOf()
@@ -48,7 +48,12 @@ class DiscoverMoviesFragment : Fragment(), DiscoverMoviesContract.View {
     override fun showDiscoverMovies(discover: List<Movies>) {
         discoverMovies.clear()
         discoverMovies.addAll(discover)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = MoviesAdapter(requireContext(), discoverMovies)
     }

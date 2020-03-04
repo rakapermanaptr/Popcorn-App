@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.popular_people
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_popular_people.*
 
 
-class PopularPeopleFragment : Fragment(), PopularPeopleContract.View {
+class PopularPeopleFragment : androidx.fragment.app.Fragment(), PopularPeopleContract.View {
 
     private lateinit var presenter: PopularPeoplePresenter
     private val popularPeoples: MutableList<People> = mutableListOf()
@@ -48,7 +48,12 @@ class PopularPeopleFragment : Fragment(), PopularPeopleContract.View {
     override fun showPopularPeoples(peoples: List<People>) {
         popularPeoples.clear()
         popularPeoples.addAll(peoples)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = PeopleAdapter(requireContext(), popularPeoples)
     }

@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_poster.view.*
 import org.jetbrains.anko.find
 
 class ImagesPeopleAdapter(private val context: Context, private val images: List<ImagesPeople>) :
-    RecyclerView.Adapter<ImagesPeopleViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<ImagesPeopleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesPeopleViewHolder {
         return ImagesPeopleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_poster, parent, false))
@@ -28,7 +28,7 @@ class ImagesPeopleAdapter(private val context: Context, private val images: List
     }
 }
 
-class ImagesPeopleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ImagesPeopleViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgPoster = view.find<ImageView>(R.id.imgPoster)
 

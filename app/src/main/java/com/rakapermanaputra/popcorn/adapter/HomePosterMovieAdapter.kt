@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class HomePosterMovieAdapter(private val context: Context, private val movies: List<Movies>) :
-    RecyclerView.Adapter<HomePosterMovieViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<HomePosterMovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomePosterMovieViewHolder {
         return HomePosterMovieViewHolder(LayoutInflater.from(context).inflate(R.layout.item_home_poster, parent, false))
@@ -30,7 +30,7 @@ class HomePosterMovieAdapter(private val context: Context, private val movies: L
     }
 }
 
-class HomePosterMovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class HomePosterMovieViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgPoster = view.find<ImageView>(R.id.imgPoster)
 

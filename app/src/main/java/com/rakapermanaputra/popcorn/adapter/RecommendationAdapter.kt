@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class RecommendationAdapter(private val context: Context, private val recommendation: List<RecommendationMovie>) :
-    RecyclerView.Adapter<RecommendationViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<RecommendationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendationViewHolder {
         return RecommendationViewHolder(LayoutInflater.from(context).inflate(R.layout.item_poster, parent, false))
@@ -28,7 +28,7 @@ class RecommendationAdapter(private val context: Context, private val recommenda
     }
 }
 
-class RecommendationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class RecommendationViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgPoster = view.find<ImageView>(R.id.imgPoster)
 

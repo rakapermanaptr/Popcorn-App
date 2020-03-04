@@ -1,20 +1,20 @@
 package com.rakapermanaputra.popcorn.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
-class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+class ViewPagerAdapter(fragmentManager: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
-    val fragmentList = arrayListOf<Fragment>()
+    val fragmentList = arrayListOf<androidx.fragment.app.Fragment>()
     val titleFragment = arrayListOf<String>()
 
-    fun populateFragment(fragment: Fragment, title: String) {
+    fun populateFragment(fragment: androidx.fragment.app.Fragment, title: String) {
         fragmentList.add(fragment)
         titleFragment.add(title)
     }
 
-    override fun getItem(position: Int): Fragment = fragmentList[position]
+    override fun getItem(position: Int): androidx.fragment.app.Fragment = fragmentList[position]
 
     override fun getCount(): Int = fragmentList.size
 

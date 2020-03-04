@@ -1,8 +1,8 @@
 package com.rakapermanaputra.popcorn.feature.home.morepopular_tv
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.TvshowsAdapter
@@ -45,7 +45,12 @@ class MorePopularTvActivity : AppCompatActivity(),
     override fun showMorePopularTv(moreTv: List<TvShows>) {
         morePopularTv.clear()
         morePopularTv.addAll(moreTv)
-        val linearLayoutManager = LinearLayoutManager(applicationContext, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                applicationContext,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = TvshowsAdapter(applicationContext, morePopularTv)
     }

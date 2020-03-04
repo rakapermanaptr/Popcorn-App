@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class TvCreditsAdapter(private val context: Context, private val movies: List<Credits>) :
-    RecyclerView.Adapter<TvCreditsViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<TvCreditsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvCreditsViewHolder {
         return TvCreditsViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
@@ -29,7 +29,7 @@ class TvCreditsAdapter(private val context: Context, private val movies: List<Cr
     }
 }
 
-class TvCreditsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class TvCreditsViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgPoster = view.find<ImageView>(R.id.imgPoster)
 

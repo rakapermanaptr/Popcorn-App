@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.discover.tvshows
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_discover_tvshows.*
 
 
-class DiscoverTvshowsFragment : Fragment(), DiscoverTvshowsContract.View {
+class DiscoverTvshowsFragment : androidx.fragment.app.Fragment(), DiscoverTvshowsContract.View {
 
     private lateinit var presenter: DiscoverTvshowsPresenter
     private val discoverTvshows: MutableList<TvShows> = mutableListOf()
@@ -48,7 +48,12 @@ class DiscoverTvshowsFragment : Fragment(), DiscoverTvshowsContract.View {
     override fun showDiscoverTvshows(discover: List<TvShows>) {
         discoverTvshows.clear()
         discoverTvshows.addAll(discover)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = TvshowsAdapter(requireContext(), discoverTvshows)
     }

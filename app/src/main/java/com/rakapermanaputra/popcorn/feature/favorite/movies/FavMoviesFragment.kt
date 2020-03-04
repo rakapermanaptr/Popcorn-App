@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.favorite.movies
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_fav_movies.*
 
 
-class FavMoviesFragment : Fragment(), FavMoviesContract.View {
+class FavMoviesFragment : androidx.fragment.app.Fragment(), FavMoviesContract.View {
 
     private lateinit var presenter: FavMoviesPresenter
     private var favMovies: MutableList<Movies> = mutableListOf()
@@ -58,7 +58,12 @@ class FavMoviesFragment : Fragment(), FavMoviesContract.View {
         favMovies.clear()
         if (movies != null) {
             favMovies.addAll(movies)
-            val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+            val linearLayoutManager =
+                androidx.recyclerview.widget.LinearLayoutManager(
+                    activity,
+                    LinearLayout.VERTICAL,
+                    false
+                )
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = MoviesAdapter(requireContext(), favMovies)
         }

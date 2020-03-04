@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_movie.reviews
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_reviews_detail.*
 
 
-class ReviewsMovieFragment : Fragment(), ReviewsMovieContract.View {
+class ReviewsMovieFragment : androidx.fragment.app.Fragment(), ReviewsMovieContract.View {
 
     private lateinit var presenter: ReviewsMoviePresenter
     private var reviewsMovie: MutableList<Review> = mutableListOf()
@@ -50,7 +50,12 @@ class ReviewsMovieFragment : Fragment(), ReviewsMovieContract.View {
     override fun showReviews(reviews: List<Review>) {
         reviewsMovie.clear()
         reviewsMovie.addAll(reviews)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = ReviewAdapter(requireContext(), reviewsMovie)
     }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.home.HomeFragment">
 
     <LinearLayout
@@ -12,99 +13,123 @@
         android:orientation="vertical"
         android:paddingLeft="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Now Playing Movie"
-            android:textStyle="bold"/>
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPagerBanner"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginTop="8dp"/>
-
-        <RelativeLayout
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingRight="8dp">
+            app:duration="800">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/home_placeholder_item"/>
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Popular Movie"
-                android:textStyle="bold" />
+                android:text="Now Playing Movie"
+                android:textStyle="bold"/>
 
-            <ImageView
-                android:id="@+id/ic_more_popular_movie"
-                android:layout_width="wrap_content"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerBanner"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="8dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_action_more" />
+                android:layout_marginTop="16dp"
+                android:paddingRight="8dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Popular Movie"
+                    android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvPopularMovie"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="8dp" />
+                <ImageView
+                    android:id="@+id/ic_more_popular_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_action_more" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingRight="8dp">
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPopularMovie"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="8dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Popular Tv"
-                android:textStyle="bold" />
+                android:layout_marginTop="16dp"
+                android:paddingRight="8dp">
 
-            <ImageView
-                android:id="@+id/ic_more_popular_tv"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Popular Tv"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ic_more_popular_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_action_more" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPopularTv"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="8dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_action_more" />
+                android:layout_marginTop="16dp"
+                android:paddingRight="8dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discover Movie"
+                    android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvPopularTv"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="8dp" />
+                <ImageView
+                    android:id="@+id/ic_more_discover_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_action_more" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingRight="8dp">
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Discover Movie"
-                android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDiscoverMovie"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="32dp" />
 
-            <ImageView
-                android:id="@+id/ic_more_discover_movie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_action_more" />
-
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvDiscoverMovie"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="32dp" />
+        </LinearLayout>
 
 
     </LinearLayout>

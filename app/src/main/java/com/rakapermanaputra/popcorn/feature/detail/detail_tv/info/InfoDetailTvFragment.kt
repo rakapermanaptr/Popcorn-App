@@ -2,7 +2,7 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_tv.info
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ import com.rakapermanaputra.popcorn.network.ApiService
 import kotlinx.android.synthetic.main.fragment_info.*
 
 
-class InfoDetailTvFragment : Fragment(), InfoDetailTvContract.View {
+class InfoDetailTvFragment : androidx.fragment.app.Fragment(), InfoDetailTvContract.View {
 
     private lateinit var presenter: InfoDetailPresenter
 

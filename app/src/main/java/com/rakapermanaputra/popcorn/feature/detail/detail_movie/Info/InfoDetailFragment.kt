@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_movie.Info
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_info_detail.*
 
 
-class InfoDetailFragment : Fragment(), InfoDetailContract.View {
+class InfoDetailFragment : androidx.fragment.app.Fragment(), InfoDetailContract.View {
 
     private lateinit var presenter: InfoDetailPresenter
     private var similarMovies: MutableList<SimilarMovie> = mutableListOf()
@@ -61,7 +61,12 @@ class InfoDetailFragment : Fragment(), InfoDetailContract.View {
     override fun showSimilarMovies(similar: List<SimilarMovie>) {
         similarMovies.clear()
         similarMovies.addAll(similar)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.HORIZONTAL,
+                false
+            )
         rvSimilar.layoutManager = linearLayoutManager
         rvSimilar.adapter = SimilarAdapter(requireContext(), similarMovies)
     }
@@ -69,7 +74,12 @@ class InfoDetailFragment : Fragment(), InfoDetailContract.View {
     override fun showRecommendation(recommend: List<RecommendationMovie>) {
         recommendationMovie.clear()
         recommendationMovie.addAll(recommend)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                false
+            )
         rvRecommendation.layoutManager = linearLayoutManager
         rvRecommendation.adapter = RecommendationAdapter(requireContext(), recommendationMovie)
     }

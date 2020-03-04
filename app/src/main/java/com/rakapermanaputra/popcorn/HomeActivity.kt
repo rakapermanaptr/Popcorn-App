@@ -1,11 +1,11 @@
 package com.rakapermanaputra.popcorn
 
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
+import androidx.fragment.app.Fragment
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
-            val fragment: Fragment = HomeFragment()
+            val fragment: androidx.fragment.app.Fragment = HomeFragment()
             supportFragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
         }
 
@@ -163,7 +163,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var fragment: Fragment? = null
+        var fragment: androidx.fragment.app.Fragment? = null
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {

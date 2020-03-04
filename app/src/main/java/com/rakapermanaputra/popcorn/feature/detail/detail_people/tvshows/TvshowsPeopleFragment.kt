@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_people.tvshows
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_tvshows_people.*
 
 
-class TvshowsPeopleFragment : Fragment(), TvCreditsContract.View {
+class TvshowsPeopleFragment : androidx.fragment.app.Fragment(), TvCreditsContract.View {
 
     private lateinit var presenter: TvCreditsPresenter
     private var tvshowsCredits: MutableList<Credits> = mutableListOf()
@@ -50,7 +50,12 @@ class TvshowsPeopleFragment : Fragment(), TvCreditsContract.View {
     override fun showTvCredits(tvCredits: List<Credits>) {
         tvshowsCredits.clear()
         tvshowsCredits.addAll(tvCredits)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = TvCreditsAdapter(requireContext(), tvshowsCredits)
     }

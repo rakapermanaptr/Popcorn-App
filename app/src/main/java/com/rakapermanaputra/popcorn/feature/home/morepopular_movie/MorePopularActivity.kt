@@ -1,8 +1,8 @@
 package com.rakapermanaputra.popcorn.feature.home.morepopular_movie
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.MoviesAdapter
@@ -46,7 +46,12 @@ class MorePopularActivity : AppCompatActivity(),
     override fun showMorePopularMovie(morePopular: List<Movies>) {
         morePopularMovies.clear()
         morePopularMovies.addAll(morePopular)
-        val linearLayoutManager = LinearLayoutManager(applicationContext, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                applicationContext,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = MoviesAdapter(applicationContext, morePopularMovies)
     }

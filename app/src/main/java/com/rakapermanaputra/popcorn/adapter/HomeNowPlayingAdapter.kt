@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class HomeNowPlayingAdapter(private val context: Context, private val movies: List<Movies>) :
-    RecyclerView.Adapter<HomeNowPlayingViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<HomeNowPlayingViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeNowPlayingViewHolder {
         return HomeNowPlayingViewHolder(LayoutInflater.from(context).inflate(R.layout.item_home_nowplaying, parent, false))
@@ -29,7 +29,7 @@ class HomeNowPlayingAdapter(private val context: Context, private val movies: Li
     }
 }
 
-class HomeNowPlayingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class HomeNowPlayingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgBackdrop = view.find<ImageView>(R.id.imgBackdrop)
 

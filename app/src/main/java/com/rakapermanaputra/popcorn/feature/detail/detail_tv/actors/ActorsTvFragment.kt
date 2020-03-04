@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_tv.actors
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_actors.*
 
 
-class ActorsTvFragment : Fragment(), ActorsTvContract.View {
+class ActorsTvFragment : androidx.fragment.app.Fragment(), ActorsTvContract.View {
 
     private lateinit var presenter: ActorsTvPresenter
     private var actorsTv: MutableList<Cast> = mutableListOf()
@@ -52,7 +52,12 @@ class ActorsTvFragment : Fragment(), ActorsTvContract.View {
     override fun showActors(actors: List<Cast>) {
         actorsTv.clear()
         actorsTv.addAll(actors)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = CasterAdapter(requireContext(), actorsTv)
     }

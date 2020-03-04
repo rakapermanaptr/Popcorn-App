@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.tvshows.on_the_air
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_tvshows_on_the_air.*
 
 
-class TvshowsOnTheAirFragment : Fragment(),
+class TvshowsOnTheAirFragment : androidx.fragment.app.Fragment(),
     TvshowsOnTheAirContract.View {
 
     private lateinit var presenter: TvshowsOnTheAirPresenter
@@ -49,7 +49,12 @@ class TvshowsOnTheAirFragment : Fragment(),
     override fun showOnTheAir(tvshows: List<TvShows>) {
         onTheAirTvshows.clear()
         onTheAirTvshows.addAll(tvshows)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = TvshowsAdapter(requireContext(), onTheAirTvshows)
     }

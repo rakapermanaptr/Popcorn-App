@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.home
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +24,7 @@ import org.jetbrains.anko.padding
 import org.jetbrains.anko.support.v4.startActivity
 
 
-class HomeFragment : Fragment(), HomeFragmentContract.View {
+class HomeFragment : androidx.fragment.app.Fragment(), HomeFragmentContract.View {
 
     private var nowPlayingMovies: MutableList<Movies> = mutableListOf()
     private val popularMovie: MutableList<Movies> = mutableListOf()
@@ -74,7 +74,12 @@ class HomeFragment : Fragment(), HomeFragmentContract.View {
     override fun showPopularMovies(popularMovies: List<Movies>) {
         popularMovie.clear()
         popularMovie.addAll(popularMovies)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.HORIZONTAL,
+                false
+            )
         rvPopularMovie.layoutManager = linearLayoutManager
         rvPopularMovie.adapter = HomePosterMovieAdapter(requireContext(), popularMovie)
     }
@@ -82,7 +87,12 @@ class HomeFragment : Fragment(), HomeFragmentContract.View {
     override fun showPopularTvs(popularTvs: List<TvShows>) {
         popularTv.clear()
         popularTv.addAll(popularTvs)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.HORIZONTAL,
+                false
+            )
         rvPopularTv.layoutManager = linearLayoutManager
         rvPopularTv.adapter = HomePosterTvAdapter(requireContext(), popularTv)
     }
@@ -90,7 +100,12 @@ class HomeFragment : Fragment(), HomeFragmentContract.View {
     override fun showDiscoverMovies(discoverMovies: List<Movies>) {
         discoverMovie.clear()
         discoverMovie.addAll(discoverMovies)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.HORIZONTAL,
+                false
+            )
         rvDiscoverMovie.layoutManager = linearLayoutManager
         rvDiscoverMovie.adapter = HomePosterMovieAdapter(requireContext(), discoverMovie)
     }

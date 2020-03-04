@@ -1,8 +1,8 @@
 package com.rakapermanaputra.popcorn.feature.home.morepopular_discover
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.adapter.MoviesAdapter
@@ -45,7 +45,12 @@ class MoreDiscoverActivity : AppCompatActivity(), MoreDiscoverContract.View {
     override fun showMoreDiscover(moreDiscover: List<Movies>) {
         moreDiscoverMovies.clear()
         moreDiscoverMovies.addAll(moreDiscover)
-        val linearLayoutManager = LinearLayoutManager(applicationContext, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                applicationContext,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = MoviesAdapter(applicationContext, moreDiscoverMovies)
     }

@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.movies.upcoming
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_movies_upcoming.*
 
 
-class MoviesUpcomingFragment : Fragment(),
+class MoviesUpcomingFragment : androidx.fragment.app.Fragment(),
     MoviesUpcomingContract.View {
 
     private lateinit var presenter: MoviesUpcomingPresenter
@@ -49,7 +49,12 @@ class MoviesUpcomingFragment : Fragment(),
     override fun showUpcoming(movies: List<Movies>) {
         upcomingMovies.clear()
         upcomingMovies.addAll(movies)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = MoviesAdapter(requireContext(), upcomingMovies)
     }

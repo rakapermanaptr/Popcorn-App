@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.tvshows.popular
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_tvshows_popular.*
 
 
-class TvshowsPopularFragment : Fragment(),
+class TvshowsPopularFragment : androidx.fragment.app.Fragment(),
     TvshowsPopularContract.View {
 
     private lateinit var presenter: TvshowsPopularPresenter
@@ -49,7 +49,12 @@ class TvshowsPopularFragment : Fragment(),
     override fun showPopular(tvshows: List<TvShows>) {
         popularTvshows.clear()
         popularTvshows.addAll(tvshows)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = TvshowsAdapter(requireContext(), popularTvshows)
     }

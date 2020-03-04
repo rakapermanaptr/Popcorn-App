@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +20,7 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class CasterAdapter(private val context: Context, private val caster: List<Cast>) :
-    RecyclerView.Adapter<CasterViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<CasterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CasterViewHolder {
         return CasterViewHolder(LayoutInflater.from(context).inflate(R.layout.item_people, parent, false))
@@ -33,7 +33,7 @@ class CasterAdapter(private val context: Context, private val caster: List<Cast>
     }
 }
 
-class CasterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class CasterViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgPorfile = view.find<ImageView>(R.id.imgProfilePath)
 

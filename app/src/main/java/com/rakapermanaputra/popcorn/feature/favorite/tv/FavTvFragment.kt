@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.favorite.tv
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_fav_tv.*
 import org.jetbrains.anko.support.v4.toast
 
 
-class FavTvFragment : Fragment(), FavTvContract.View {
+class FavTvFragment : androidx.fragment.app.Fragment(), FavTvContract.View {
 
     private lateinit var presenter: FavTvPresenter
     private var favTv: MutableList<TvShows> = mutableListOf()
@@ -59,7 +59,12 @@ class FavTvFragment : Fragment(), FavTvContract.View {
         favTv.clear()
         if (tvShows != null) {
             favTv.addAll(tvShows)
-            val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+            val linearLayoutManager =
+                androidx.recyclerview.widget.LinearLayoutManager(
+                    activity,
+                    LinearLayout.VERTICAL,
+                    false
+                )
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.adapter = TvshowsAdapter(requireContext(), favTv)
         } else {

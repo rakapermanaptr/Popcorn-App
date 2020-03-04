@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.watchlist.movie
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_watchlist_movie.*
 
 
-class WatchlistMovieFragment : Fragment(), WatchlistMovieContract.View {
+class WatchlistMovieFragment : androidx.fragment.app.Fragment(), WatchlistMovieContract.View {
 
     private lateinit var presenter: WatchlistMoviePresenter
     private var watchlistMovies: MutableList<Movies> = mutableListOf()
@@ -56,7 +56,12 @@ class WatchlistMovieFragment : Fragment(), WatchlistMovieContract.View {
     override fun showAllWatchlist(movies: List<Movies>) {
         watchlistMovies.clear()
         watchlistMovies.addAll(movies)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = MoviesAdapter(requireContext(), watchlistMovies)
     }

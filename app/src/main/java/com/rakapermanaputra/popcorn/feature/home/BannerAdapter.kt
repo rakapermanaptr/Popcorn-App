@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.feature.home
 
 import android.content.Context
-import android.support.v4.view.PagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.model.Movies
 import java.lang.Exception
 
-class BannerAdapter(private val context: Context, private var bannerList: List<Movies>): PagerAdapter() {
+class BannerAdapter(private val context: Context, private var bannerList: List<Movies>): androidx.viewpager.widget.PagerAdapter() {
 
     override fun isViewFromObject(view: View, o: Any): Boolean = view == o
 

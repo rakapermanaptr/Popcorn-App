@@ -1,12 +1,12 @@
 package com.rakapermanaputra.popcorn.feature.home
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.rakapermanaputra.popcorn.R
 import com.rakapermanaputra.popcorn.model.Movies
 
-class HomeAdapter(private val data: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(private val data: List<Any>) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     companion object {
         private const val ITEM_HEADER = 0
@@ -21,7 +21,7 @@ class HomeAdapter(private val data: List<Any>) : RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_HEADER -> HomeHeaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_header, parent, false))
             ITEM_POSTER -> HomeItemHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_home_poster, parent, false))
@@ -31,7 +31,7 @@ class HomeAdapter(private val data: List<Any>) : RecyclerView.Adapter<RecyclerVi
 
     override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             ITEM_HEADER -> {
                 val headerHolder = holder as HomeHeaderViewHolder

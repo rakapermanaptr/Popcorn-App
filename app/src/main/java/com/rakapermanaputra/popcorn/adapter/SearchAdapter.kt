@@ -2,7 +2,7 @@ package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +19,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class SearchAdapter(private val context: Context, private val search: List<Search>) :
-    RecyclerView.Adapter<SearchViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         return SearchViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
@@ -32,7 +32,7 @@ class SearchAdapter(private val context: Context, private val search: List<Searc
     }
 }
 
-class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class SearchViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgPoster = view.find<ImageView>(R.id.imgPoster)
 

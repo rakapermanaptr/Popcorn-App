@@ -1,8 +1,8 @@
 package com.rakapermanaputra.popcorn.feature.search
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.widget.LinearLayout
 import android.widget.SearchView
@@ -46,7 +46,12 @@ class SearchActivity : AppCompatActivity(), SearchContract.View {
     override fun showResultSearch(listResult: List<Search>) {
         results.clear()
         results.addAll(listResult)
-        val linearLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                this,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = SearchAdapter(this, results)
     }

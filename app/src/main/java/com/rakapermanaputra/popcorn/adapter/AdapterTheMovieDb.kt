@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.rakapermanaputra.popcorn.model.Movies
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class AdapterTheMovieDb(private val context: Context, private var result: ArrayList<Movies>)
-    : RecyclerView.Adapter<AdapterTheMovieDb.ViewHolder>() {
+    : androidx.recyclerview.widget.RecyclerView.Adapter<AdapterTheMovieDb.ViewHolder>() {
 
     private val TAG: String = javaClass.simpleName
 
@@ -37,5 +37,5 @@ class AdapterTheMovieDb(private val context: Context, private var result: ArrayL
         notifyItemRangeChanged(0, this.result.size)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
 }

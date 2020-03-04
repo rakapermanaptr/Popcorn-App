@@ -1,7 +1,7 @@
 package com.rakapermanaputra.popcorn.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class PeopleAdapter(private val context: Context, private val peoples: List<People>) :
-    RecyclerView.Adapter<PeopleViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<PeopleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PeopleViewHolder {
         return PeopleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_people, parent, false))
@@ -30,7 +30,7 @@ class PeopleAdapter(private val context: Context, private val peoples: List<Peop
     }
 }
 
-class PeopleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class PeopleViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val imgPorfile = view.find<ImageView>(R.id.imgProfilePath)
 

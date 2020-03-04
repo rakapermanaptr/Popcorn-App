@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_tv.seasons
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ import com.rakapermanaputra.popcorn.utils.visible
 import kotlinx.android.synthetic.main.fragment_seasons.*
 
 
-class SeasonsTvFragment : Fragment(), SeasonsTvContract.View {
+class SeasonsTvFragment : androidx.fragment.app.Fragment(), SeasonsTvContract.View {
 
     private lateinit var presenter: SeasonsTvPresenter
     private var tvSeasons: MutableList<Season> = mutableListOf()
@@ -43,7 +43,12 @@ class SeasonsTvFragment : Fragment(), SeasonsTvContract.View {
     override fun showSeasons(season: List<Season>) {
         tvSeasons.clear()
         tvSeasons.addAll(season)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = TvShowsSeasonsAdapter(requireContext(), tvSeasons)
     }

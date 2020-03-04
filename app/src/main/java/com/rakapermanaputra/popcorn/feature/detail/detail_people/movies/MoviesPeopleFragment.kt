@@ -2,8 +2,8 @@ package com.rakapermanaputra.popcorn.feature.detail.detail_people.movies
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_movies_people.*
 
 
 
-class MoviesPeopleFragment : Fragment(), MovieCreditsContract.View {
+class MoviesPeopleFragment : androidx.fragment.app.Fragment(), MovieCreditsContract.View {
 
     private lateinit var presenter: MovieCreditsPresenter
     private var movieCredits: MutableList<Credits> = mutableListOf()
@@ -51,7 +51,12 @@ class MoviesPeopleFragment : Fragment(), MovieCreditsContract.View {
     override fun showMovieCredits(movies: List<Credits>) {
         movieCredits.clear()
         movieCredits.addAll(movies)
-        val linearLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        val linearLayoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(
+                activity,
+                LinearLayout.VERTICAL,
+                false
+            )
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = MovieCreditsAdapter(requireContext(), movieCredits)
     }
